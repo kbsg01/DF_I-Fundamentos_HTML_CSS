@@ -5,108 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Store</title>
     <meta name="description" content="Tienda de videojuegos con información de contacto y catálogo de juegos.">
-    <meta name="keywords" content="Videojuegos, Tienda, Juegos, Catálogo, Chile, Game Store Chile">    
-    <link rel="stylesheet" href="PFY2201_Exp1_S2_Karla_Santibáñez.css">
+    <meta name="keywords" content="Videojuegos, Tienda, Juegos, Catálogo, Chile, Game Store Chile">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <header class="bs-site-header">
         <h1>Bienvenidos a Game Store</h1>
         <p>La mejor tienda de videojuegos del mercado.</p>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#home">Inicio</a></li>
-            <li><a href="#games">Videojuegos</a></li>
-            <li><a href="#about">Acerca de</a></li>
-            <li><a href="#contact">Contacto</a></li>
+    <nav class="bs-site-nav">
+        <ul class="bs-nav-list">
+            <li><a class="bs-nav-link" href="#home">Inicio</a></li>
+            <li><a class="bs-nav-link" href="#games">Videojuegos</a></li>
+            <li><a class="bs-nav-link" href="#about">Acerca de</a></li>
+            <li><a class="bs-nav-link" href="#contact">Contacto</a></li>
         </ul>
     </nav>
-    <section id="home">
-        <h2>Inicio</h2>
+    <section id="home" class="bs-section">
+        <h2 class="bs-section-title">Inicio</h2>
         <p>Revisa nuestra selección de videojuegos más populares.</p>
     </section>
-    <hr/>
-    <section id="games">
-        <h2>Videojuegos</h2>
+    <hr class="bs-divider"/>
+    <section id="games" class="bs-section">
+        <h2 class="bs-section-title">Videojuegos</h2>
         <p>Explora algunos juegos destacados por categoría.</p>
 
-        <h3>Acción</h3>
-        <ul>
-            <li>
-                <img src="https://placehold.co/120x80?text=CyberStrike" alt="Carátula del videojuego CyberStrike">
-                <div>
-                    <strong>CyberStrike</strong>
-                    <p>Un shooter futurista con combates intensos y misiones de alto riesgo.</p>
-                    <p>Precio: $29.990</p>
+        <h3 class="bs-section-subtitle">Acción</h3>
+        <ul class="bs-card-grid">
+            <li class="bs-card">
+                <img class="bs-card-media" src="https://placehold.co/120x80?text=CyberStrike" alt="Carátula del videojuego CyberStrike">
+                <div class="bs-card-body">
+                    <strong class="bs-card-title">CyberStrike</strong>
+                    <p class="bs-card-text">Un shooter futurista con combates intensos y misiones de alto riesgo.</p>
+                    <p class="bs-card-text">Precio: $29.990</p>
                 </div>
             </li>
-            <li>
-                <img src="https://placehold.co/120x80?text=Battle+Zone" alt="Carátula del videojuego Battle Zone">
-                <div>
-                    <strong>Battle Zone</strong>
-                    <p>Batallas dinámicas en mapas abiertos con estrategia y velocidad.</p>
-                    <p>Precio: $24.990</p>
-                </div>
-            </li>
-        </ul>
-
-        <h3>Aventura</h3>
-        <ul>
-            <li>
-                <img src="https://placehold.co/120x80?text=Mystic+Quest" alt="Carátula del videojuego Mystic Quest">
-                <div>
-                    <strong>Mystic Quest</strong>
-                    <p>Un viaje épico lleno de enigmas, criaturas y mundos misteriosos.</p>
-                    <p>Precio: $19.990</p>
-                </div>
-            </li>
-            <li>
-                <img src="https://placehold.co/120x80?text=Lost+Island" alt="Carátula del videojuego Lost Island">
-                <div>
-                    <strong>Lost Island</strong>
-                    <p>Explora una isla abandonada con secretos ocultos y desafíos inesperados.</p>
-                    <p>Precio: $22.990</p>
+            <li class="bs-card">
+                <img class="bs-card-media" src="https://placehold.co/120x80?text=Battle+Zone" alt="Carátula del videojuego Battle Zone">
+                <div class="bs-card-body">
+                    <strong class="bs-card-title">Battle Zone</strong>
+                    <p class="bs-card-text">Batallas dinámicas en mapas abiertos con estrategia y velocidad.</p>
+                    <p class="bs-card-text">Precio: $24.990</p>
                 </div>
             </li>
         </ul>
 
-        <h3>Deportes</h3>
-        <ul>
-            <li>
-                <img src="https://placehold.co/120x80?text=Pro+League+Soccer" alt="Carátula del videojuego Pro League Soccer">
-                <div>
-                    <strong>Pro League Soccer</strong>
-                    <p>Simulador deportivo con partidos intensos, torneos y control preciso.</p>
-                    <p>Precio: $17.990</p>
+        <h3 class="bs-section-subtitle">Aventura</h3>
+        <ul class="bs-card-grid">
+            <li class="bs-card">
+                <img class="bs-card-media" src="https://placehold.co/120x80?text=Mystic+Quest" alt="Carátula del videojuego Mystic Quest">
+                <div class="bs-card-body">
+                    <strong class="bs-card-title">Mystic Quest</strong>
+                    <p class="bs-card-text">Un viaje épico lleno de enigmas, criaturas y mundos misteriosos.</p>
+                    <p class="bs-card-text">Precio: $19.990</p>
                 </div>
             </li>
-            <li>
-                <img src="https://placehold.co/120x80?text=Rally+Extreme" alt="Carátula del videojuego Rally Extreme">
-                <div>
-                    <strong>Rally Extreme</strong>
-                    <p>Carreras trepidantes con pistas desafiantes y vehículos de alto rendimiento.</p>
-                    <p>Precio: $21.990</p>
+            <li class="bs-card">
+                <img class="bs-card-media" src="https://placehold.co/120x80?text=Lost+Island" alt="Carátula del videojuego Lost Island">
+                <div class="bs-card-body">
+                    <strong class="bs-card-title">Lost Island</strong>
+                    <p class="bs-card-text">Explora una isla abandonada con secretos ocultos y desafíos inesperados.</p>
+                    <p class="bs-card-text">Precio: $22.990</p>
+                </div>
+            </li>
+        </ul>
+
+        <h3 class="bs-section-subtitle">Deportes</h3>
+        <ul class="bs-card-grid">
+            <li class="bs-card">
+                <img class="bs-card-media" src="https://placehold.co/120x80?text=Pro+League+Soccer" alt="Carátula del videojuego Pro League Soccer">
+                <div class="bs-card-body">
+                    <strong class="bs-card-title">Pro League Soccer</strong>
+                    <p class="bs-card-text">Simulador deportivo con partidos intensos, torneos y control preciso.</p>
+                    <p class="bs-card-text">Precio: $17.990</p>
+                </div>
+            </li>
+            <li class="bs-card">
+                <img class="bs-card-media" src="https://placehold.co/120x80?text=Rally+Extreme" alt="Carátula del videojuego Rally Extreme">
+                <div class="bs-card-body">
+                    <strong class="bs-card-title">Rally Extreme</strong>
+                    <p class="bs-card-text">Carreras trepidantes con pistas desafiantes y vehículos de alto rendimiento.</p>
+                    <p class="bs-card-text">Precio: $21.990</p>
                 </div>
             </li>
         </ul>
     </section>
-    <hr/>
-    <section id="contact">
-        <h2>Contacto</h2>
+    <hr class="bs-divider"/>
+    <section id="contact" class="bs-section">
+        <h2 class="bs-section-title">Contacto</h2>
         <p>Si quieres más información, escríbenos o visítanos en nuestras redes.</p>
-        <ul>
-            <li>correo@gamestore.cl</li>
-            <li>+56 9 1234 5678</li>
-            <li>Santiago, Chile</li>
+        <ul class="bs-card-list">
+            <li class="bs-card bs-card--accent">correo@gamestore.cl</li>
+            <li class="bs-card bs-card--accent">+56 9 1234 5678</li>
+            <li class="bs-card bs-card--accent">Santiago, Chile</li>
         </ul>
     </section>
-    <hr/>
-    <section id="about">
-        <h2>Acerca de</h2>
-        <p>Game Store es una tienda básica de ejemplo para mostrar videojuegos, precios e información de contacto.</p>
-        <p>Trabajamos con juegos digitales y contenido para distintas categorías.</p>
+    <hr class="bs-divider"/>
+    <section id="about" class="bs-section">
+        <h2 class="bs-section-title">Acerca de</h2>
+        <p class="bs-card bs-card--accent">Game Store es una tienda básica de ejemplo para mostrar videojuegos, precios e información de contacto.</p>
+        <p class="bs-card bs-card--accent">Trabajamos con juegos digitales y contenido para distintas categorías.</p>
     </section>
-    <footer>
+    <footer class="bs-site-footer">
         <p>Copyright © 2026 Game Store. Todos los derechos reservados.</p>
     </footer>
 </body>
