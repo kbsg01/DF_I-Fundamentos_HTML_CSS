@@ -1,0 +1,99 @@
+:root {
+  --brand-primary: #4f46e5;
+  --brand-dark: #1e1b4b;
+}
+
+/* Compensa la altura del navbar fijo para que el contenido no quede oculto detras de el */
+body {
+  padding-top: 70px;
+  scroll-behavior: smooth;
+}
+
+/* Enlace "Saltar al contenido" para navegacion accesible por teclado (WCAG 2.1 AA) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 2000;
+  background: #ffffff;
+  color: #000000;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0 0.375rem 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+.navbar-brand span.brand-accent {
+  color: #a5b4fc;
+}
+
+/* Refuerza el foco visible en los enlaces del navbar para accesibilidad por teclado */
+.navbar .nav-link:focus-visible,
+.navbar .navbar-brand:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.hero-carousel {
+  margin-top: -0.01px; /* elimina el espacio residual bajo el navbar fijo */
+}
+
+.carousel-item img {
+  height: 60vh;
+  min-height: 320px;
+  object-fit: cover;
+  filter: brightness(0.75);
+}
+
+.carousel-caption h2,
+.carousel-caption p {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.feature-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--brand-primary);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.card-project img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-project {
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+.card-project:hover,
+.card-project:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.12);
+}
+
+footer a {
+  color: #cbd5e1;
+  text-decoration: none;
+}
+footer a:hover,
+footer a:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Respeta la preferencia del usuario de reducir animaciones (accesibilidad) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
