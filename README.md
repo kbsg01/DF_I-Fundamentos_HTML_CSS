@@ -106,15 +106,25 @@ La pagina se probo en un navegador basado en Chromium. Para una validacion compl
 ![Catalogo interactivo de Game Store](docs/catalogo-interactivo.png)
 
 ### Carrito y pantalla de pago con productos almacenados dinamicamente
+
 ![Resumen de carrito](docs/carrito-interactivo.png)
 ![Resumen de pago interactivo](docs/checkout-interactivo.png)
 
 ## 6. Instrucciones de ejecucion
 
-La Fetch API requiere un servidor HTTP; por ese motivo, el proyecto se puede previsualizar la página utilizando una extensión de vscode para levantar un servidor https:
+La Fetch API requiere un servidor HTTP; por ese motivo, el proyecto se puede previsualizar ya sea levantando un servidor con python o
+utilizando una extensión de vscode para levantar un servidor https:
 
-- [Live Server | Ritwick Deyer](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-- [Live Preview | Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server)
+- Con python:
+
+```powershell
+    cd src
+    python -m http.server 8080
+```
+
+- Extensiones VSCode
+  - [Live Server | Ritwick Deyer](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+  - [Live Preview | Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server)
 
 Luego, abrir `http://localhost:8080` en el navegador.
 
