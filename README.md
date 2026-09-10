@@ -2,7 +2,7 @@
 
 **Asignatura:** Desarrollo Frontend I  
 **Actividad:** Manipulando el DOM con JavaScript para mejorar la interactividad  
-**Estudiante:** Karla Santibáñez   
+**Estudiante:** Karla Santibáñez
 **Fecha de entrega:** 09/09/2026
 
 ## 1. Descripcion del proyecto
@@ -106,35 +106,15 @@ La pagina se probo en un navegador basado en Chromium. Para una validacion compl
 ![Catalogo interactivo de Game Store](docs/catalogo-interactivo.png)
 
 ### Carrito y pantalla de pago con productos almacenados dinamicamente
-
+![Resumen de carrito](docs/carrito-interactivo.png)
 ![Resumen de pago interactivo](docs/checkout-interactivo.png)
 
 ## 6. Instrucciones de ejecucion
 
-La Fetch API requiere un servidor HTTP; por ese motivo, el proyecto no debe abrirse directamente con `file://`.
+La Fetch API requiere un servidor HTTP; por ese motivo, el proyecto se puede previsualizar la página utilizando una extensión de vscode para levantar un servidor https:
 
-```powershell
-cd src
-python -m http.server 8080
-```
-
-
-
-
-
-
-  
-pO utilizando una extensión para levantar un servidor https
-- 
-[Live Serv | Ritwick Deyer](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)- [Live Preview | Microsoft(https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server)
- 
-
-
-
-
-
-
-
+- [Live Server | Ritwick Deyer](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- [Live Preview | Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server)
 
 Luego, abrir `http://localhost:8080` en el navegador.
 
