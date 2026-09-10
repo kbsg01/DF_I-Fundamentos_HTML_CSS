@@ -2,8 +2,8 @@
 
 **Asignatura:** Desarrollo Frontend I  
 **Actividad:** Manipulando el DOM con JavaScript para mejorar la interactividad  
-**Estudiante:** [Completar nombre]  
-**Fecha de entrega:** [Completar fecha]
+**Estudiante:** Karla Santibáñez   
+**Fecha de entrega:** 09/09/2026
 
 ## 1. Descripcion del proyecto
 
