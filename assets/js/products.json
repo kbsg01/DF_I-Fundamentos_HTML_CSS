@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "nombre": "Audífonos Inalámbricos",
+    "precio": 29990,
+    "categoria": "tecnologia",
+    "imagen": "assets/img/audifonos.svg",
+    "descripcion": "Audífonos Bluetooth con cancelación de ruido y 20 horas de batería."
+  },
+  {
+    "id": 2,
+    "nombre": "Mouse Ergonómico",
+    "precio": 12990,
+    "categoria": "tecnologia",
+    "imagen": "assets/img/mouse.svg",
+    "descripcion": "Mouse inalámbrico ergonómico, ideal para largas jornadas frente al computador."
+  },
+  {
+    "id": 3,
+    "nombre": "Teclado Mecánico",
+    "precio": 34990,
+    "categoria": "tecnologia",
+    "imagen": "assets/img/teclado.svg",
+    "descripcion": "Teclado mecánico retroiluminado con switches táctiles."
+  },
+  {
+    "id": 4,
+    "nombre": "Smartwatch Deportivo",
+    "precio": 49990,
+    "categoria": "tecnologia",
+    "imagen": "assets/img/smartwatch.svg",
+    "descripcion": "Reloj inteligente con monitor de ritmo cardíaco y GPS."
+  },
+  {
+    "id": 5,
+    "nombre": "Lámpara LED de Escritorio",
+    "precio": 15990,
+    "categoria": "hogar",
+    "imagen": "assets/img/lampara.svg",
+    "descripcion": "Lámpara regulable con luz cálida y fría, ideal para el escritorio."
+  },
+  {
+    "id": 6,
+    "nombre": "Taza Térmica",
+    "precio": 8990,
+    "categoria": "hogar",
+    "imagen": "assets/img/taza.svg",
+    "descripcion": "Taza térmica de acero inoxidable que mantiene la temperatura por horas."
+  },
+  {
+    "id": 7,
+    "nombre": "Cojín Decorativo",
+    "precio": 11990,
+    "categoria": "hogar",
+    "imagen": "assets/img/cojin.svg",
+    "descripcion": "Cojín decorativo suave, disponible para combinar con cualquier ambiente."
+  },
+  {
+    "id": 8,
+    "nombre": "Difusor de Aromas",
+    "precio": 19990,
+    "categoria": "hogar",
+    "imagen": "assets/img/difusor.svg",
+    "descripcion": "Difusor ultrasónico con luz LED para aromatizar cualquier habitación."
+  }
+]

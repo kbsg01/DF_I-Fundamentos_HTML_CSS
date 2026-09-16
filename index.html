@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- ===================== METADATOS Y CONFIGURACION BASE ===================== -->
+  <meta charset="UTF-8">
+  <!-- viewport: obligatorio para que Bootstrap active su comportamiento responsivo (mobile-first) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad sumativa Semana 6 - Optimizando la lógica y rendimiento de una página web con JavaScript - Desarrollo Frontend I (PFY2201)">
+  <meta name="author" content="Karla Santigut">
+  <title>BQBrand | eCommerce</title>
+
+  <!-- ===================== BOOTSTRAP 5.3 (CSS via CDN) ===================== -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous">
+
+  <!-- Bootstrap Icons: apoyo visual decorativo en navbar, carrito y footer -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+"
+    crossorigin="anonymous">
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- Enlace de salto, visible solo al recibir foco: mejora la navegación por teclado -->
+  <a class="skip-link btn btn-light" href="#contenido-principal">Saltar al contenido principal</a>
+
+  <!-- =================================================================== -->
+  <!-- 1) BARRA DE NAVEGACION: marca, categorías simuladas y buscador       -->
+  <!-- =================================================================== -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" aria-label="Navegación principal">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#hero"><span class="brand-accent">BQ</span>Brand</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarPrincipal"
+          aria-controls="navbarPrincipal"
+          aria-expanded="false"
+          aria-label="Abrir/cerrar menú de navegación">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarPrincipal">
+          <!-- Categorías simuladas (requisito: al menos dos) -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#catalogo" data-categoria="tecnologia">Tecnología</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#catalogo" data-categoria="hogar">Hogar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#carrito">
+                <i class="bi bi-cart3" aria-hidden="true"></i> Carrito
+                <span id="contador-carrito" class="badge rounded-pill bg-primary">0</span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Formulario de búsqueda: dispara el evento "submit" -->
+          <form id="form-busqueda" class="d-flex" role="search">
+            <label for="input-busqueda" class="visually-hidden">Buscar producto</label>
+            <input
+              id="input-busqueda"
+              type="search"
+              class="form-control me-2"
+              placeholder="Buscar producto..."
+              aria-label="Buscar producto">
+            <button class="btn btn-outline-light" type="submit">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <span class="visually-hidden">Buscar</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenido-principal">
+
+    <!-- =================================================================== -->
+    <!-- 2) ENCABEZADO DE LA TIENDA                                           -->
+    <!-- =================================================================== -->
+    <section id="hero" class="bg-dark text-light text-center py-5">
+      <div class="container">
+        <h1 class="fw-bold">Bienvenido a BQBrand</h1>
+        <p class="lead mb-0">Tecnología y artículos para el hogar, al mejor precio.</p>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 3) CATALOGO DE PRODUCTOS                                             -->
+    <!-- Se llena dinámicamente desde assets/js/app.js usando Fetch API.      -->
+    <!-- =================================================================== -->
+    <section id="catalogo" class="py-5" aria-labelledby="titulo-catalogo">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h2 id="titulo-catalogo" class="fw-bold">Nuestros Productos</h2>
+          <p class="text-muted">Usa el buscador o recorre el catálogo para encontrar lo que necesitas.</p>
+        </div>
+
+        <!-- Mensaje de error amigable: oculto por defecto, se muestra solo si falla la carga -->
+        <div id="alerta-carga" class="alert alert-warning d-none" role="alert"></div>
+
+        <div id="contenedor-productos" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+          <!-- Las tarjetas de producto se insertan aquí vía JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 4) RESUMEN DEL CARRITO                                               -->
+    <!-- =================================================================== -->
+    <section id="carrito" class="py-5 bg-light" aria-labelledby="titulo-carrito">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-6 carrito-sticky">
+            <h2 id="titulo-carrito" class="fw-bold mb-3">
+              <i class="bi bi-cart3" aria-hidden="true"></i> Mi Carrito
+            </h2>
+            <ul id="lista-carrito" class="list-group mb-3">
+              <li class="list-group-item text-muted">Tu carrito está vacío.</li>
+            </ul>
+            <div class="d-flex justify-content-between fw-bold fs-5">
+              <span>Total</span>
+              <span id="total-carrito">$0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- PIE DE PAGINA (FOOTER)                                               -->
+  <!-- =================================================================== -->
+  <footer class="bg-dark text-light py-4">
+    <div class="container text-center">
+      <p class="mb-2">&copy; 2026 Karla Santigut - Desarrollo Frontend I (PFY2201)</p>
+      <p class="mb-2 small">Actividad sumativa Semana 6: Optimizando la lógica y rendimiento de una página web con JavaScript</p>
+      <div>
+        <a href="https://github.com/kbsg01" target="_blank" rel="noopener" class="me-3" aria-label="Visitar GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+        <a href="https://www.linkedin.com/in/karla-sg/" target="_blank" rel="noopener" aria-label="Visitar LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== BOOTSTRAP 5.3 (JS Bundle via CDN) ===================== -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <!-- Lógica propia: carga de productos, carrito y búsqueda -->
+  <script src="assets/js/app.js"></script>
+
+</body>
+</html>
