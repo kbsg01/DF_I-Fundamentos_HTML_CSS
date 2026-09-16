@@ -1,169 +1,259 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- ===================== METADATOS Y CONFIGURACION BASE ===================== -->
-  <meta charset="UTF-8">
-  <!-- viewport: obligatorio para que Bootstrap active su comportamiento responsivo (mobile-first) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Actividad sumativa Semana 6 - Optimizando la lógica y rendimiento de una página web con JavaScript - Desarrollo Frontend I (PFY2201)">
-  <meta name="author" content="Karla Santigut">
-  <title>BQBrand | eCommerce</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Store</title>
+    <meta name="description" content="Tienda de videojuegos con catálogo dinámico, carrito de compras y buscador.">
+    <meta name="keywords" content="Videojuegos, Tienda, Juegos, Catálogo, Chile, Game Store Chile">
 
-  <!-- ===================== BOOTSTRAP 5.3 (CSS via CDN) ===================== -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous">
-
-  <!-- Bootstrap Icons: apoyo visual decorativo en navbar, carrito y footer -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+"
-    crossorigin="anonymous">
-
-  <!-- Estilos propios -->
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- Enlace de salto, visible solo al recibir foco -->
+    <a class="skip-link btn btn-light" href="#contenido-principal">Saltar al contenido principal</a>
 
-  <!-- Enlace de salto, visible solo al recibir foco: mejora la navegación por teclado -->
-  <a class="skip-link btn btn-light" href="#contenido-principal">Saltar al contenido principal</a>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" aria-label="Navegacion principal">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#home">Game<span class="brand-accent">Store</span></a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarPrincipal"
+                    aria-controls="navbarPrincipal"
+                    aria-expanded="false"
+                    aria-label="Abrir/cerrar menu de navegacion">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarPrincipal">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Inicio</a></li>
 
-  <!-- =================================================================== -->
-  <!-- 1) BARRA DE NAVEGACION: marca, categorías simuladas y buscador       -->
-  <!-- =================================================================== -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" aria-label="Navegación principal">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="#hero"><span class="brand-accent">BQ</span>Brand</a>
+                        <!-- Categorías simuladas del catálogo (requisito S6: al menos dos) -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#games" id="navbarCategorias" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Videojuegos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarCategorias">
+                                <li><a class="dropdown-item" href="#row-accion">Acción</a></li>
+                                <li><a class="dropdown-item" href="#row-aventura">Aventura</a></li>
+                                <li><a class="dropdown-item" href="#row-deportes">Deportes</a></li>
+                            </ul>
+                        </li>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarPrincipal"
-          aria-controls="navbarPrincipal"
-          aria-expanded="false"
-          aria-label="Abrir/cerrar menú de navegación">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+                        <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                    </ul>
 
-        <div class="collapse navbar-collapse" id="navbarPrincipal">
-          <!-- Categorías simuladas (requisito: al menos dos) -->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#catalogo" data-categoria="tecnologia">Tecnología</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#catalogo" data-categoria="hogar">Hogar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#carrito">
-                <i class="bi bi-cart3" aria-hidden="true"></i> Carrito
-                <span id="contador-carrito" class="badge rounded-pill bg-primary">0</span>
-              </a>
-            </li>
-          </ul>
+                    <!-- Formulario de búsqueda: dispara el evento "submit" (requisito S6) -->
+                    <form id="form-busqueda" class="d-flex me-lg-3 my-2 my-lg-0" role="search">
+                        <label for="input-busqueda" class="visually-hidden">Buscar videojuego</label>
+                        <input
+                            id="input-busqueda"
+                            type="search"
+                            class="form-control form-control-sm me-2"
+                            placeholder="Buscar videojuego..."
+                            aria-label="Buscar videojuego">
+                        <button class="btn btn-outline-light btn-sm" type="submit">
+                            <i class="bi bi-search" aria-hidden="true"></i>
+                            <span class="visually-hidden">Buscar</span>
+                        </button>
+                    </form>
 
-          <!-- Formulario de búsqueda: dispara el evento "submit" -->
-          <form id="form-busqueda" class="d-flex" role="search">
-            <label for="input-busqueda" class="visually-hidden">Buscar producto</label>
-            <input
-              id="input-busqueda"
-              type="search"
-              class="form-control me-2"
-              placeholder="Buscar producto..."
-              aria-label="Buscar producto">
-            <button class="btn btn-outline-light" type="submit">
-              <i class="bi bi-search" aria-hidden="true"></i>
-              <span class="visually-hidden">Buscar</span>
-            </button>
-          </form>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main id="contenido-principal">
-
-    <!-- =================================================================== -->
-    <!-- 2) ENCABEZADO DE LA TIENDA                                           -->
-    <!-- =================================================================== -->
-    <section id="hero" class="bg-dark text-light text-center py-5">
-      <div class="container">
-        <h1 class="fw-bold">Bienvenido a BQBrand</h1>
-        <p class="lead mb-0">Tecnología y artículos para el hogar, al mejor precio.</p>
-      </div>
-    </section>
-
-    <!-- =================================================================== -->
-    <!-- 3) CATALOGO DE PRODUCTOS                                             -->
-    <!-- Se llena dinámicamente desde assets/js/app.js usando Fetch API.      -->
-    <!-- =================================================================== -->
-    <section id="catalogo" class="py-5" aria-labelledby="titulo-catalogo">
-      <div class="container">
-        <div class="text-center mb-4">
-          <h2 id="titulo-catalogo" class="fw-bold">Nuestros Productos</h2>
-          <p class="text-muted">Usa el buscador o recorre el catálogo para encontrar lo que necesitas.</p>
-        </div>
-
-        <!-- Mensaje de error amigable: oculto por defecto, se muestra solo si falla la carga -->
-        <div id="alerta-carga" class="alert alert-warning d-none" role="alert"></div>
-
-        <div id="contenedor-productos" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-          <!-- Las tarjetas de producto se insertan aquí vía JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- =================================================================== -->
-    <!-- 4) RESUMEN DEL CARRITO                                               -->
-    <!-- =================================================================== -->
-    <section id="carrito" class="py-5 bg-light" aria-labelledby="titulo-carrito">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 col-lg-6 carrito-sticky">
-            <h2 id="titulo-carrito" class="fw-bold mb-3">
-              <i class="bi bi-cart3" aria-hidden="true"></i> Mi Carrito
-            </h2>
-            <ul id="lista-carrito" class="list-group mb-3">
-              <li class="list-group-item text-muted">Tu carrito está vacío.</li>
-            </ul>
-            <div class="d-flex justify-content-between fw-bold fs-5">
-              <span>Total</span>
-              <span id="total-carrito">$0</span>
+                    <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
+                        <li class="nav-item">
+                            <button
+                                type="button"
+                                class="btn btn-outline-light position-relative ms-lg-2"
+                                data-bs-toggle="offcanvas"
+                                data-bs-target="#carritoOffcanvas"
+                                aria-controls="carritoOffcanvas">
+                                <i class="bi bi-cart3" aria-hidden="true"></i>
+                                <span class="visually-hidden">Ver carrito de compras</span>
+                                <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
+        </nav>
+    </header>
+
+    <main id="contenido-principal">
+        <!-- Carrusel con un juego destacado por categoria -->
+        <section id="home" class="hero-carousel" aria-label="Destacados">
+            <div class="container py-4 text-center">
+                <h1 class="fw-bold">Bienvenidos a Game Store</h1>
+                <p class="text-muted">La mejor tienda de videojuegos del mercado.</p>
+            </div>
+            <div id="carruselDestacados" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carruselDestacados" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Ir a la diapositiva 1: Counter-Strike 2"></button>
+                    <button type="button" data-bs-target="#carruselDestacados" data-bs-slide-to="1" aria-label="Ir a la diapositiva 2: The Witcher 3: Wild Hunt"></button>
+                    <button type="button" data-bs-target="#carruselDestacados" data-bs-slide-to="2" aria-label="Ir a la diapositiva 3: Rocket League"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/library_hero.jpg" class="d-block w-100" alt="Portada del videojuego Counter-Strike 2">
+                        <div class="carousel-caption">
+                            <h2>Counter-Strike 2</h2>
+                            <p>Shooter táctico competitivo por equipos, referente del género esports.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/library_hero.jpg" class="d-block w-100" alt="Portada del videojuego The Witcher 3: Wild Hunt">
+                        <div class="carousel-caption">
+                            <h2>The Witcher 3: Wild Hunt</h2>
+                            <p>RPG de mundo abierto sobre un cazador de monstruos en busca de su hija adoptiva.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/252950/library_hero.jpg" class="d-block w-100" alt="Portada del videojuego Rocket League">
+                        <div class="carousel-caption">
+                            <h2>Rocket League</h2>
+                            <p>Fútbol con autos cohete en partidas rápidas multijugador.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carruselDestacados" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carruselDestacados" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+                <!-- Cumple WCAG 2.2.2: permite detener el auto-advance a usuarios de teclado/lector de pantalla -->
+                <button type="button" class="btn btn-sm btn-light carousel-pause" id="btnPausarCarrusel" aria-pressed="false">
+                    <i class="bi bi-pause-fill" aria-hidden="true"></i>
+                    <span class="visually-hidden">Pausar carrusel</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="games" class="py-5" aria-labelledby="titulo-games">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 id="titulo-games" class="fw-bold">Videojuegos</h2>
+                    <p class="text-muted col-lg-8 mx-auto">Explora algunos juegos destacados por categoría, o usa el buscador de la barra de navegación.</p>
+                    <p id="catalog-status" class="text-muted mb-0" aria-live="polite">Preparando catálogo...</p>
+                </div>
+
+                <!-- Catálogo agrupado por categoría: se oculta mientras hay una búsqueda activa -->
+                <div id="contenedor-categorias">
+                    <h3 class="h5 mb-3" id="row-accion-titulo">Acción</h3>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 mb-5" id="row-accion">
+                        <!-- Renderizado por Fetch API desde data/games.json -->
+                    </div>
+
+                    <h3 class="h5 mb-3">Aventura</h3>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 mb-5" id="row-aventura">
+                    </div>
+
+                    <h3 class="h5 mb-3">Deportes</h3>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4" id="row-deportes">
+                    </div>
+                </div>
+
+                <!-- Resultados de búsqueda: solo visible cuando el formulario de búsqueda se envía con texto -->
+                <div id="seccion-resultados" class="d-none">
+                    <h3 class="h5 mb-3">Resultados de la búsqueda</h3>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4" id="row-resultados">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-5 bg-light" aria-labelledby="titulo-contact">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8 text-center">
+                        <h2 id="titulo-contact" class="fw-bold mb-3">Contacto</h2>
+                        <p class="text-muted mb-4">Si quieres más información, escríbenos o visítanos en nuestras redes.</p>
+                    </div>
+                </div>
+                <ul class="list-unstyled row row-cols-1 row-cols-md-3 g-3 justify-content-center text-center mb-0">
+                    <li class="col">
+                        <a class="card h-100 border-0 shadow-sm py-3 text-decoration-none text-body" href="mailto:correo@gamestore.cl">
+                            <i class="bi bi-envelope-fill fs-3 text-primary" aria-hidden="true"></i>
+                            <p class="mb-0 mt-2">correo@gamestore.cl</p>
+                        </a>
+                    </li>
+                    <li class="col">
+                        <a class="card h-100 border-0 shadow-sm py-3 text-decoration-none text-body" href="tel:+56912345678">
+                            <i class="bi bi-telephone-fill fs-3 text-primary" aria-hidden="true"></i>
+                            <p class="mb-0 mt-2">+56 9 1234 5678</p>
+                        </a>
+                    </li>
+                    <li class="col">
+                        <div class="card h-100 border-0 shadow-sm py-3">
+                            <i class="bi bi-geo-alt-fill fs-3 text-primary" aria-hidden="true"></i>
+                            <p class="mb-0 mt-2">Santiago, Chile</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="about" class="py-5" aria-labelledby="titulo-about">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8 text-center">
+                        <h2 id="titulo-about" class="fw-bold mb-3">Acerca de</h2>
+                        <p class="text-muted">Game Store es una tienda básica de ejemplo para mostrar videojuegos, precios e información de contacto.</p>
+                        <p class="text-muted mb-0">Trabajamos con juegos digitales y contenido para distintas categorías.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-light py-4">
+        <div class="container text-center">
+            <p class="mb-0">Copyright © 2026 Game Store. Todos los derechos reservados.</p>
         </div>
-      </div>
-    </section>
+    </footer>
 
-  </main>
-
-  <!-- =================================================================== -->
-  <!-- PIE DE PAGINA (FOOTER)                                               -->
-  <!-- =================================================================== -->
-  <footer class="bg-dark text-light py-4">
-    <div class="container text-center">
-      <p class="mb-2">&copy; 2026 Karla Santigut - Desarrollo Frontend I (PFY2201)</p>
-      <p class="mb-2 small">Actividad sumativa Semana 6: Optimizando la lógica y rendimiento de una página web con JavaScript</p>
-      <div>
-        <a href="https://github.com/kbsg01" target="_blank" rel="noopener" class="me-3" aria-label="Visitar GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
-        <a href="https://www.linkedin.com/in/karla-sg/" target="_blank" rel="noopener" aria-label="Visitar LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
-      </div>
+    <!-- Panel lateral del carrito de compras, poblado dinámicamente por js/cart.js -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoOffcanvas" aria-labelledby="carritoOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h2 class="offcanvas-title h5" id="carritoOffcanvasLabel">Carrito de compras</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar carrito"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column">
+            <div id="cart-items">
+                <p class="text-muted text-center mb-0">Tu carrito está vacío.</p>
+            </div>
+            <div class="mt-auto pt-3 border-top">
+                <div class="d-flex justify-content-between fw-bold mb-3">
+                    <span>Total</span>
+                    <span id="cart-total">Gratis</span>
+                </div>
+                <a href="./checkout.html" id="btn-ir-a-pagar" class="btn btn-success w-100 mb-2 disabled">Ir a pagar</a>
+                <button type="button" id="btn-vaciar-carrito" class="btn btn-outline-secondary w-100">Vaciar carrito</button>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <!-- ===================== BOOTSTRAP 5.3 (JS Bundle via CDN) ===================== -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-
-  <!-- Lógica propia: carga de productos, carrito y búsqueda -->
-  <script src="assets/js/app.js"></script>
-
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="./assets/js/api/game_db.js"></script>
+    <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/carrusel.js"></script>
+    <script src="./assets/js/search.js"></script>
 </body>
 </html>
