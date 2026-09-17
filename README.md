@@ -66,6 +66,8 @@ PFY2201_Exp2_S6_Karla_Santibáñez/
 |-- docs/
 |   |-- catalogo-interactivo.png      Captura del catálogo dinámico
 |   |-- carrito-interactivo.png       Captura del carrito interactivo
+|   |-- busqueda-interactiva.png      Captura del busqueda interactiva
+|   |-- dropdown-categorias.png       Captura del dropdown de categorías
 |   `-- checkout-interactivo.png      Captura del flujo de pago
 `-- assets/
     |-- css/
@@ -131,7 +133,9 @@ La página se probó en un navegador basado en Chromium. Se recomienda repetir e
 ![Resumen de carrito](docs/carrito-interactivo.png)
 ![Resumen de pago interactivo](docs/checkout-interactivo.png)
 
-> Nota: estas capturas provienen de la base de la Semana 5, cuyo catálogo y carrito no cambiaron visualmente. Antes de la entrega final se recomienda agregar una captura del dropdown de categorías y de los resultados del nuevo buscador.
+### Dropdown y barra de búsqueda en navbar
+![Dropdown de categorías](docs/dropdown-categorias.png)
+![Barra de búsqueda](docs/busqueda-interactiva.png)
 
 ## 6. Instrucciones de ejecución
 
@@ -152,8 +156,6 @@ Luego, abrir `http://localhost:8080` en el navegador.
 ## 7. Repositorio y entrega
 
 **Repositorio GitHub:** [kbsg01/DF_I-Fundamentos_HTML_CSS](https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS)
-
-El repositorio contiene el código fuente, este informe y las capturas de evidencia, continuando el historial de ramas usado en semanas anteriores (S1-S5). Antes de entregar, se debe verificar que los cambios estén publicados en la rama correspondiente mediante `git status`, `git add .`, `git commit` y `git push`, y que la rama `gh-pages` sirva la versión más reciente.
 
 ## 8. Conclusión
 
