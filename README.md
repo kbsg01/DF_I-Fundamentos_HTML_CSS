@@ -3,7 +3,7 @@
 **Asignatura:** Desarrollo Frontend I
 **Actividad:** Optimizando la Lógica y Rendimiento de una Página Web con JavaScript
 **Estudiante:** Karla Santibáñez
-**Fecha de entrega:** 16/09/2026
+**Fecha de entrega:** 21/09/2026
 
 ## 1. Descripción del proyecto
 
