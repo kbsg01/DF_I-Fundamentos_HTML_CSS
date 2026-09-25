@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215" viewBox="0 0 460 215" role="img" aria-label="Portada no disponible">
-  <rect width="460" height="215" fill="#1e1b2e"/>
-  <g fill="none" stroke="#6c7086" stroke-width="3">
-    <rect x="30" y="30" width="400" height="155" rx="8"/>
-    <path d="M30 150 L150 90 L220 140 L290 70 L430 160" />
-    <circle cx="120" cy="70" r="16"/>
-  </g>
-  <text x="50%" y="205" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#9399b2" text-anchor="middle">Portada no disponible</text>
-</svg>

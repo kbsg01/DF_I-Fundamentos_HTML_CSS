@@ -1,0 +1,54 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+	color: #17202a;
+	background: #f5f3ee;
+	font-family: "Space Grotesk", sans-serif;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+}
+* {
+	box-sizing: border-box;
+    transition: all 0.5s ease-in-out;
+}
+html {
+	scrollbar-width: thin;
+	scrollbar-color: #413d3c #f5f3ee;
+	scroll-behavior: smooth;
+}
+body {
+	margin: 0;
+	min-width: 320px;
+}
+button,
+input,
+select {
+	font: inherit;
+}
+button {
+	cursor: pointer;
+}
+button:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+a {
+	color: inherit;
+}
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+:focus-visible {
+	outline: 3px solid #e84f2a;
+	outline-offset: 3px;
+}
