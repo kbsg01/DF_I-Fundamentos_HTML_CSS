@@ -117,9 +117,10 @@ T037/T038 siguen pendientes: no se despacho GitHub Actions ni se afirma una URL 
 
 ## Correccion CI: overflow mobile
 
-GitHub Actions reporto `scrollWidth=366` en viewport de 360 px. La causa fue el grid mobile
-del footer con tres columnas `max-content` mientras habia cuatro enlaces. Se cambio a dos
-columnas flexibles con `min-width: 0`. Validacion en `s8`: `npm run test:e2e` -> 26/26 PASS;
-`npm run lint` -> PASS. Se agrego diagnostico de elementos desbordados a
-`tests/e2e/accessibility.spec.js` para que futuras regresiones identifiquen el elemento.
+GitHub Actions reporto `scrollWidth=366` en viewport de 360 px; la anotacion identifico el
+enlace `Soporte` en `right=366`. El footer tenia cuatro enlaces pero la media query tardia
+de mobile mantenia tres columnas `max-content` y sobrescribia la primera correccion. Ambas
+reglas mobile usan ahora dos columnas flexibles con `min-width: 0`. Validacion en `s8`:
+`npm run test:e2e` -> 26/26 PASS; `npm run lint` -> PASS. Se agrego diagnostico de elementos
+desbordados a `tests/e2e/accessibility.spec.js` para que una regresion identifique el elemento.
 
