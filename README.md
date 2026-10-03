@@ -20,6 +20,8 @@ Este repositorio contiene el desarrollo del curso **Desarrollo Frontend I**.
   https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS/tree/s6
 - **S7** (avance/entrega de la semana 7):
   https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS/tree/s7
+  - **S7** (avance/entrega de la semana 8):
+  https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS/tree/s8
 - **gh-pages** (publicación web del proyecto):
   https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS/tree/gh-pages
 
