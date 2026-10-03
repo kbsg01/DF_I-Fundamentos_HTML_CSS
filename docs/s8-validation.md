@@ -115,3 +115,11 @@ El smoke local uso `python -m http.server` sobre una copia temporal ignorada en 
 `vite preview` sirve `dist` desde `/` y no simula por si solo el prefijo de un project site.
 T037/T038 siguen pendientes: no se despacho GitHub Actions ni se afirma una URL Pages.
 
+## Correccion CI: overflow mobile
+
+GitHub Actions reporto `scrollWidth=366` en viewport de 360 px. La causa fue el grid mobile
+del footer con tres columnas `max-content` mientras habia cuatro enlaces. Se cambio a dos
+columnas flexibles con `min-width: 0`. Validacion en `s8`: `npm run test:e2e` -> 26/26 PASS;
+`npm run lint` -> PASS. Se agrego diagnostico de elementos desbordados a
+`tests/e2e/accessibility.spec.js` para que futuras regresiones identifiquen el elemento.
+

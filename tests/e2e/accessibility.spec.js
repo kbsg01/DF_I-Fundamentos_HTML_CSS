@@ -8,8 +8,18 @@ test("keeps search keyboard-accessible without overflow or motion under reduced 
 	const layout = await page.evaluate(() => ({
 		viewport: document.documentElement.clientWidth,
 		content: document.documentElement.scrollWidth,
+		overflow: [...document.querySelectorAll("body *")]
+			.map((element) => ({
+				tag: element.tagName,
+				className: typeof element.className === "string" ? element.className : "",
+				text: element.innerText?.slice(0, 60),
+				right: element.getBoundingClientRect().right,
+			}))
+			.filter((element) => element.right > innerWidth + 0.5)
+			.sort((a, b) => b.right - a.right)
+			.slice(0, 20),
 	}));
-	expect(layout.content).toBeLessThanOrEqual(layout.viewport);
+	expect(layout.content, JSON.stringify(layout.overflow)).toBeLessThanOrEqual(layout.viewport);
 
 	const search = page.getByRole("searchbox", { name: "Buscar videojuego" });
 	await expect(search).toBeVisible();
