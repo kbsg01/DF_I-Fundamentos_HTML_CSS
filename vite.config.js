@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: env.GITHUB_ACTIONS ? '/DF_I-Fundamentos_HTML_CSS/' : '/',
+  base: env.VITE_BASE_PATH ?? '/',
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] })

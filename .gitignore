@@ -10,6 +10,10 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+build
+coverage
+test-results
+playwright-report
 *.local
 
 # Editor directories and files
@@ -23,7 +27,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# specific files
-.env
-.env.local
-.env.*.local
+# Environment files are private unless explicitly named as examples.
+.env*
+!.env.example

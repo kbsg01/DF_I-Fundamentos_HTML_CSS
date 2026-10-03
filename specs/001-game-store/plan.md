@@ -9,46 +9,45 @@ Este comando solo genera diseno. No instala dependencias, provisiona ni desplieg
 
 ## Summary
 
-Evolucionar la SPA existente con descubrimiento RAWG, ofertas propias, carrito persistente,
-Supabase Auth real y Mercado Pago Checkout Pro de Chile exclusivamente en pruebas.
-Supabase Postgres y Edge Functions conservan precios autoritativos, pedidos y resultados.
-El usuario aprueba dos destinos: Pages para demostracion academica sin credenciales y Vercel
-para el flujo integrado. Ambos reutilizan componentes; no se construye otra tienda.
+Evolucionar la SPA React/Vite existente como demo educativa autocontenida en servicios:
+catalogo y ofertas ficticias desde JSON local, carrito persistente, perfil de acceso ficticio
+y resultados de compra simulados. Publicar un solo build estatico en GitHub Pages. No conectar
+RAWG, Supabase, Mercado Pago ni otros servicios; no recoger datos personales o de pago.
 
 ## Technical Context
 
-**Language/Version**: JavaScript ES modules/JSX existente; React 19.2, Vite 8.3.
-Node 22.12+ en CI compatible con Vite; local observado 26.8.1. Edge Functions en TypeScript/Deno
-gestionado por Supabase; fijar versiones compatibles en el lockfile al implementar.
+**Language/Version**: JavaScript ES modules/JSX; React 19.2.8 y Vite 8.3.0 existentes.
+Node 22.12+ compatible con Vite; Node 26.8.1 observado localmente.
 
-**Primary Dependencies**: React DOM, Bootstrap 5.3, animate.js y React Compiler existentes.
-Agregar `@supabase/supabase-js` para identidad; Vitest, Testing Library y Playwright para pruebas.
-Mercado Pago por REST server-side y redireccion alojada, sin SDK de tarjetas ni router nuevo.
+**Primary Dependencies**: React DOM, Bootstrap 5.3, animate.js, React Compiler, Vitest,
+Testing Library, jsdom y Playwright ya figuran en `package.json`. No agregar SDKs de servicios.
+Retirar durante implementacion la dependencia/configuracion Supabase heredada tras verificar
+que no existan imports activos.
 
-**Storage**: JSON local de ofertas conservado; publicacion validada a Postgres para precios
-de checkout. Postgres con RLS para pedidos/intentos. `qBrandsCart` en localStorage migrable.
-Sesiones gestionadas por Supabase SDK; no almacenar contrasenas ni datos de tarjeta propios.
+**Storage**: `public/data/products.json` es el catalogo/ofertas de demostracion; `qBrandsCart`
+en localStorage conserva el carrito con compatibilidad del formato existente. El perfil y el
+comprobante ficticios viven solo en estado React; no se persisten cuentas ni transacciones.
 
-**Testing**: Vitest/Testing Library para UI, reducer y adaptadores; Deno test para funciones;
-Supabase local con Docker para SQL/RLS; Playwright para recorridos y screenshots.
-Suites reales de proveedores separadas de fixtures; ningun mock acredita un pago integrado.
+**Testing**: Vitest/Testing Library para servicios locales, reducer/carrito y componentes;
+Playwright Chromium para flujos a 360 y 1280 px; `npm run lint`, `npm run build` y preview.
+No hay pruebas de integracion con servicios externos en este alcance.
 
-**Target Platform**: Navegadores actuales, 360 y 1280 px. Pages con subruta existente
-`/DF_I-Fundamentos_HTML_CSS/`, Vercel con raiz `/`; Supabase HTTPS para auth y backend.
+**Target Platform**: Navegadores actuales y GitHub Pages como sitio estatico de proyecto,
+con la subruta ya configurada `/DF_I-Fundamentos_HTML_CSS/`.
 
-**Project Type**: SPA existente con backend gestionado minimo, un vendedor, solo sandbox.
+**Project Type**: SPA React/Vite, exclusivamente cliente y estaticamente publicada.
 
-**Performance Goals**: SC-001: 9/10 descubrimientos en menos de 60 s; SC-004: compra en
-menos de 3 min sin esperas externas. Busqueda con debounce de 300 ms, 20 juegos/pagina;
-3 intentos maximo para fallos transitorios y timeout de 10 s por intento de catalogo.
+**Performance Goals**: SC-001: al menos 9/10 recorridos de descubrimiento bajo 60 s;
+SC-004: acceso, revision y resultado simulados bajo 3 min. El catalogo local debe mostrar
+estados de carga/error/recuperacion sin bloquear el carrito.
 
-**Constraints**: CLP entero, pagos positivos, sin claves de activacion ni cobros reales.
-Claves privilegiadas solo en backend. Callback a raiz con query, no rutas que dependan de rewrites.
-No duplicar estado del carrito ni reemplazar Bootstrap/React Compiler.
+**Constraints**: CLP entero; sin autenticacion, APIs, backend, pedidos, cobros, contrasenas,
+datos de tarjeta, secretos ni entrega de claves reales. Mantener React, Bootstrap, el contrato
+del carrito y el base path de Pages. La demo debe identificar acceso/resultados como ficticios.
 
-**Scale/Scope**: 21 productos locales como antecedente; enriquecimiento por IDs verificados,
-exploracion paginada de RAWG, cuenta, carrito, revision y resultado de pedido.
-Sin vendedores externos, administracion completa, multi-moneda ni inventario real.
+**Scale/Scope**: Un catalogo local pequeno (21 entradas actuales), un visitante por navegador,
+carrito persistente y simulacion de acceso/compra. Sin inventario real, vendedores externos,
+administracion, multi-moneda ni comunicacion con proveedores.
 
 ## Constitution Check
 
@@ -56,12 +55,12 @@ Sin vendedores externos, administracion completa, multi-moneda ni inventario rea
 
 | Principio | Gate previo a investigacion | Gate posterior al diseno |
 | --- | --- | --- |
-| I. Propiedad declarativa | PASS: conservar componentes, contexto y funcion reducer | PASS: `useState(prev => cartReducer(prev, action))` aplica transiciones; contexto sigue siendo unico owner |
-| II. Catalogo independiente | PASS: JSON conservado; RAWG separado de precios | PASS: servicio normaliza RAWG; JSON publica ofertas a servidor por proceso confiable |
-| III. Accesibilidad/movimiento | PASS: no sustituir interacciones accesibles | PASS: teclado, foco, estados anunciados y reduced-motion son gates de navegador |
-| IV. Integridad/validacion | PASS: API de carrito y clave `qBrandsCart` preservadas | PASS: migracion validada, calculos compartidos, formulario nativo y confirmacion autoritativa |
-| V. Cambios verificados | PASS: alcance limitado y dependencias justificadas | PASS: pruebas por modulo, lint/build y evidencia de integraciones antes de entregar |
-| Restricciones tecnicas | PASS: React/Vite/Bootstrap continúan | PASS: SPA intacta; backend solo cubre secretos, identidad, autorizacion y pagos |
+| I. Propiedad declarativa | PASS: conservar componentes, contexto y reducer del carrito | PASS: un solo CartContext aplica transiciones puras mediante setter funcional de `useState` |
+| II. Catalogo independiente | PASS: mantener los datos fuera de la presentacion | PASS: `catalogApi` obtiene JSON local; cambios del schema se validan con todos sus consumidores |
+| III. Accesibilidad/movimiento | PASS: preservar teclado, nombres accesibles y movimiento reducido | PASS: estados loading/error/empty y flujos se prueban en navegador |
+| IV. Integridad/validacion | PASS: preservar `qBrandsCart`, calculos CLP y validacion nativa | PASS: el checkout valida el resumen y solo genera una salida ficticia, nunca una transaccion |
+| V. Cambios verificados | PASS: reutilizar stack y dependencias ya instaladas | PASS: unit, E2E, lint, build y preview antes de publicar el artefacto |
+| Restricciones tecnicas | PASS: React/Vite/Bootstrap existentes | PASS: SPA cliente sin backend, secretos ni integraciones de proveedores |
 
 La constitucion exige un limite de contexto/reducer, no el hook `useReducer` especifico.
 Cambiar solo el mecanismo de estado a `useState` mantiene la funcion pura y la API existente,
@@ -95,130 +94,104 @@ public/data/products.json
 src/
   App.jsx
   components/          # componentes existentes + detalle, acceso y resultado
-  context/             # CartProvider y AuthProvider; reducer puro compartido
-  hooks/               # catalogo, carrito, sesion y pedido
-  services/            # catalogApi, identidad y checkout
+  context/             # CartProvider y reducer puro compartido
+  hooks/               # catalogo, carrito y estado de demo
+  services/            # catalogApi JSON local
   utils/               # moneda y validacion compartida cuando corresponda
-supabase/
-  migrations/          # ofertas, pedidos, idempotencia, RLS y transacciones
-  functions/
-    catalog/
-    checkout/
-    orders/
-    payment-webhook/
-    reconcile-payments/
-    _shared/
 tests/
   unit/
-  integration/
   e2e/
 .github/workflows/deploy-pages.yml
 vite.config.js
 ```
 
-**Structure Decision**: No mover la SPA a otra carpeta ni introducir un backend Express.
-Edge Functions forman el unico limite servidor; compartir validaciones puras solo si evita
-divergencia real. La prueba y el componente se organizan con helpers reutilizados.
+**Structure Decision**: Mantener la SPA y sus componentes actuales, sin backend ni carpetas
+de proveedores. Extender `products.json`, `catalogApi`, `CartContext` y `Checkout` donde
+corresponda; agregar pruebas bajo las carpetas Vitest/Playwright existentes.
 
 ## Complexity Tracking
 
-Sin desviaciones constitucionales. Supabase y el limite servidor son necesarios para login
-real, RLS, precios confiables y secretos; una SPA exclusivamente estatica no puede verificar
-pagos. Dos destinos usan el mismo codigo con capacidades de build distintas, por la politica
-de Pages y la entrega academica aprobada por el usuario.
+No hay desviaciones constitucionales ni complejidad adicional aprobada. Eliminar del alcance
+los artefactos heredados de Supabase, su SDK y el script de pruebas de integracion sin objetivo;
+no reemplazarlos por otro backend o proveedor.
 
 ## Phase 0 - Research
 
-[research.md](research.md) resuelve identidad, pasarela/CLP, fuentes de precios, seguridad,
-idempotencia, continuidad S6/S7, S8 y hosting. Requisitos operativos son gates de ejecucion,
-no decisiones de arquitectura sin resolver. No queda `NEEDS CLARIFICATION` pendiente.
+[research.md](research.md) documenta catalogo local, limites de simulacion, persistencia,
+S8 y hosting estatico. No quedan decisiones de arquitectura sin resolver ni requisitos de
+cuentas, secretos o disponibilidad de proveedores.
 
 ## Phase 1 - Design
 
-Modelo: [data-model.md](data-model.md). Interfaces:
-[storefront.md](contracts/storefront.md) y [backend.md](contracts/backend.md).
-Validacion ejecutable tras implementar: [quickstart.md](quickstart.md).
+Modelo: [data-model.md](data-model.md). Contrato visible de la SPA:
+[storefront.md](contracts/storefront.md). [backend.md](contracts/backend.md) registra que
+no existe contrato backend en este alcance. Validacion: [quickstart.md](quickstart.md).
 
-Orden de implementacion a descomponer posteriormente: asegurar pruebas de regresion y
-estado S8; enriquecer/migrar ofertas y carrito; desplegar schema/RLS y auth;
-implementar checkout/idempotencia/webhook/reconciliacion; terminar UI accesible;
-validar servicios reales de prueba y publicar las dos variantes. No crear tareas aqui.
+Orden para descomponer despues: pruebas de regresion/cart S8; schema local de demo y filtros;
+perfil ficticio y checkout simulado con avisos; accesibilidad/E2E; limpieza de dependencias y
+configuracion Supabase heredadas; build base-path, preview y publicacion Pages autorizada.
+No crear tareas aqui.
 
 ### Requirement Coverage
 
 | Requisitos | Superficie responsable | Evidencia prevista |
 | --- | --- | --- |
-| FR-001, FR-002, FR-004, FR-005 | catalogApi, useCatalog, proxy RAWG y fichas | filtros globales, paginacion, errores, atribucion y ultimo resultado |
-| FR-003 | JSON de ofertas + publicacion Postgres | asociaciones verificadas, oferta completa, sin compra de metadata sola |
-| FR-006, FR-007, FR-008 | contexto/reducer, useState y controles | operaciones, total, migracion, reload y condicionales |
-| FR-009, FR-014 | AuthProvider, Supabase Auth y RLS | registro/recovery, expiracion, logout, aislamiento entre dos usuarios |
-| FR-010, FR-011, FR-012, FR-013 | checkout, orders, webhook y reconciliacion | importe validado, sandbox real, retorno falsificado y duplicaciones |
-| FR-015, FR-016 | componentes Bootstrap y utilidades existentes | teclado, dos viewports, reduced-motion y regresion S6/S7 |
-| FR-017 | builds Pages/Vercel y evidencias | URLs publicas, subruta, dist y 3 grupos de capturas |
+| FR-001, FR-002, FR-005 | `products.json`, `catalogApi`, `useCatalog`, `ProductCatalog` | carga local, filtros/orden y estados recuperables |
+| FR-003, FR-004 | modelo de entrada local y vistas de catalogo | oferta separada de informacion, atribucion cuando aplique y bloqueo de incompletos |
+| FR-006, FR-007, FR-008 | `CartContext`, `cartStore`, `ProductCard`, `CartDrawer` | operaciones CLP, persistencia, compatibilidad y estados condicionales |
+| FR-009, FR-014 | estado ficticio y `Checkout` | activar/cerrar perfil demo sin credenciales ni informacion personal |
+| FR-010, FR-011, FR-012, FR-013 | `Checkout` y resultado transitorio | importe validado, cuatro estados simulados, aviso, no duplicacion ni pedido real |
+| FR-015, FR-016 | componentes Bootstrap existentes | teclado, 360/1280 px, reduced-motion y regresion S6/S7 |
+| FR-017 | build estatico de Pages y evidencias | URL publica, subruta/JSON/assets y tres grupos de capturas |
 
 ### S8 Assessment Coverage
 
 | Criterio/puntos | Aplicacion concreta | Gate de entrega |
 | --- | --- | --- |
-| useState / 25 | catalogo; lineas del carrito actualizadas funcionalmente via reducer; formularios y filtros | demostrar actualizaciones y ausencia de estado duplicado |
-| useEffect / 20 | fetch del JSON/RAWG, cancelacion, suscripcion auth y persistencia | demostrar carga dinamica y limpieza bajo StrictMode |
-| Renderizado condicional / 20 | loading/error/empty; carrito; agregado; sesion y resultado | capturas reproducibles y pruebas de cada estado |
-| Organizacion / 15 | limites existentes, servicios y helpers; comentarios breves solo en bloques no evidentes | revision de reutilizacion, claridad y comentarios pedidos por S8 |
-| Publicacion / 20 | rama gh-pages con dist academico, URL Pages y enlace a Vercel | accesibilidad publica y rutas/assets verificados |
+| useState / 25 | catalogo, carrito via reducer puro, controles y simulacion | transiciones y ausencia de estado duplicado |
+| useEffect / 20 | fetch de JSON local, cancelacion y persistencia | carga dinamica y cleanup bajo StrictMode |
+| Renderizado condicional / 20 | loading/error/empty, perfil ficticio, carrito y resultado | pruebas/capturas reproducibles de cada estado |
+| Organizacion / 15 | componentes, servicios y utilidades existentes | reutilizacion, nombres y comentarios utiles segun S8 |
+| Publicacion / 20 | build `dist` estatico con base path del proyecto | URL publica, repositorio, assets y rutas comprobados |
 
-Mantener busqueda, categorias, destacados, CLP y persistencia de S6/S7. El workflow actual
-usa Pages Actions desde `s7`; al implementar ajustar a S8 y publicar `dist` en `gh-pages`
-para cumplir la pauta literal. No escribir fuente ni secretos en esa rama de salida.
-Las credenciales y el checkout integrado NO estaran disponibles en el build Pages.
+Conservar busqueda, categorias, destacados, CLP, carrito persistente y validacion de compra
+de S6/S7. Configurar un unico workflow GitHub Actions para instalar, correr calidad, generar
+`dist` y publicarlo en Pages. No crear build Vercel, variables de modo integrado ni secretos.
+La publicacion efectiva y los cambios de settings requieren la autorizacion correspondiente;
+este plan no ejecuta ningun despliegue.
 
 ## Testing Strategy
 
-**appType**: mixed (SPA y funciones HTTP). **primaryValidationStack**: Vitest/Testing
-Library + Deno test + Supabase local/Docker para SQL y RLS + Playwright Chromium.
-No hay comando `test` ni assets de tests existentes; crear `npm test` como entrada canonica
-para unit/contratos, `npm run test:integration` para backend y `npm run test:e2e` para navegador.
-CI debe ejecutar las tres suites ademas de `npm run lint` y `npm run build` para ambos modos.
+**appType**: SPA estatica. **primaryValidationStack**: Vitest/Testing Library y Playwright
+Chromium. `npm test`, `npm run test:e2e`, `npm run lint`, `npm run build` y `npm run preview`
+ya estan definidos. No hay archivos de pruebas unitarias/E2E todavia. El script
+`test:integration` apunta a un archivo inexistente y debe retirarse junto con la configuracion
+de tests de backend heredada; no reemplazarlo por una suite de proveedor.
 
-**legacyTestAssets**: busqueda de `*.test.*`/`*.spec.*` sin resultados; no hay suites a migrar.
-Las evidencias e historial previos no sustituyen tests. No se han ejecutado tests de aplicacion
-durante este comando de diseno ni se afirma un baseline verde.
+Recorridos criticos: carga/error y filtros del catalogo local; persistencia/migracion y
+operaciones del carrito; activar/cerrar perfil ficticio; resultados aprobados/rechazados/
+cancelados/pendientes rotulados como simulacion; repeticion, accesibilidad y base path Pages.
+Tests deben probar importes CLP enteros, carrito vacio, estado no persistido del recibo,
+ausencia de campos personales/pago y no enviar solicitudes a APIs de proveedor.
 
-Recorridos criticos: descubrimiento/ficha; operaciones/migracion del carrito;
-registro/acceso/recovery/logout; pago sandbox con todos los estados;
-fraude de retorno/importe/usuario, reintento y publicacion de ambas variantes.
+**Acceptance/review**: comprobar SC-001 a SC-008, 360/1280 px, teclado, foco y reduced-motion;
+`npm run lint`, tests unitarios, E2E y build deben pasar. Abrir el `dist` con preview bajo el
+base path del proyecto y confirmar JSON/assets, ausencia de errores de consola y avisos
+visibles de simulacion. Las capturas acreditan solo el comportamiento educativo; no afirmaran
+login, pedidos, inventario ni pagos reales.
 
-| Capacidad | Disponible observado | Fallback si falla al ejecutar | Brecha |
-| --- | --- | --- | --- |
-| Infra | Docker daemon 29.7.2 | proyecto Supabase de pruebas dedicado | requiere credenciales/red; mocks no prueban RLS |
-| Navegador | Node 26.8.1; binarios Playwright no verificados | pruebas HTTP y UI aisladas | no acredita layout, navegacion ni accesibilidad; entrega bloqueada |
-| Funciones | Deno no instalado | runtime local de Supabase CLI/Docker o instalar Deno | ejecutar tests es requisito, no omitir por ausencia de CLI |
-| Proveedores | cuentas y SMTP no configurados por este comando | fixtures para trabajo local | no acredita login/recovery ni pagos integrados; gate final bloqueado |
-
-**External dependency strategy**: fixtures de RAWG y respuestas de pago en unit/contratos;
-Auth/Postgres reales locales para RLS, transacciones e identidades distintas; proyectos remotos
-dedicados para SMTP y Mercado Pago sandbox. Contract tests del frontend consumen fixtures
-del contrato HTTP y los tests de funciones producen ese mismo formato. No SQLite para afirmar
-conformidad de RLS Postgres. Limitar logs a IDs y codigos, nunca tokens ni PII.
-
-**Infrastructure**: helpers comunes de catalogo/carrito, dos identidades y pedidos UUID;
-rollback/cleanup y vendedor sandbox aislado. Crear tests de arranque para catalog, checkout,
-orders, webhook y reconciliacion. Tests por tarea con conteos pass/fail/skip; fallo significa
-tarea incompleta. Correo y credenciales se configuran fuera del repo y del chat.
-
-**Acceptance/review**: verificar SC-001 a SC-008, evidencias de 360/1280 px y reduced-motion,
-RLS denegando lectura ajena y escritura de importes, rechazo de `live_mode=true`, webhook
-falso/repetido/desordenado, retiro parcial del carrito y retorno que no autoriza por URL.
-Cada fallback debe conservar su brecha en el reporte; no certificar E2E real con fixtures.
+**External dependency strategy**: no hay integraciones de datos, identidad o pagos. El catalogo
+JSON es una dependencia estatica del build; las URLs de portadas ya presentes pueden fallar y
+deben usar alternativa visual. Los tests interceptan o fijan esas imagenes cuando necesiten
+determinismo, sin simular un servicio de negocio.
 
 ## Execution Prerequisites
 
-- Proyecto Supabase de pruebas, SMTP verificado, URLs de retorno y politicas RLS desplegadas.
-- App Mercado Pago Chile con vendedor/comprador de pruebas distintos, access token de ese
-  vendedor y secreto webhook; no instalar credenciales productivas. Validar cuenta y modo.
-- RAWG key y licencia/cuota vigentes; key solo servidor integrado, nunca build Pages.
-- IDs de juegos y metadatos de oferta revisados antes de importar a Postgres; incompletos no vendibles.
-- URLs exactas de Vercel y Pages, y autorizacion para publicar. No provisionar en esta fase.
-- Instalacion de herramientas de tests en implementacion; verificar Chromium y Supabase CLI.
+- Node 22.12+ y npm compatibles con Vite; Chromium Playwright para E2E.
+- Configuracion de Pages para este repositorio y permiso de publicacion, antes del despliegue.
+- Ninguna cuenta de proveedor, clave API, SMTP, Docker, Deno, base de datos o secreto.
 
-Estos gates estan disenados, no ejecutados. El plan esta completo; la entrega integrada
-no puede declararse aprobada hasta cumplirlos.
+Los tests/lint/build iniciales constan en [s8-validation.md](../../docs/s8-validation.md);
+esta planificacion no los vuelve a ejecutar ni declara implementacion completa. El checklist
+de calidad de la spec mantiene CHK001 y CHK016 pendientes por la plataforma Pages nombrada;
+no son fallos constitucionales, y el destino publico fue una decision explicita del usuario.

@@ -1,19 +1,26 @@
 /** @format */
 
+import { normalizeDemoCatalog } from "../utils/demoProducts";
+
 const CATALOG_URL = `${import.meta.env.BASE_URL}data/products.json`;
 const RETRYABLE_STATUS_CODES = new Set([408, 429, 500, 502, 503, 504]);
 
 function wait(milliseconds, signal) {
 	return new Promise((resolve, reject) => {
-		const timeoutId = window.setTimeout(resolve, milliseconds);
-		signal?.addEventListener(
-			"abort",
-			() => {
-				window.clearTimeout(timeoutId);
-				reject(new DOMException("La solicitud fue cancelada.", "AbortError"));
-			},
-			{ once: true },
-		);
+		if (signal?.aborted) {
+			reject(new DOMException("La solicitud fue cancelada.", "AbortError"));
+			return;
+		}
+
+		const onAbort = () => {
+			window.clearTimeout(timeoutId);
+			reject(new DOMException("La solicitud fue cancelada.", "AbortError"));
+		};
+		const timeoutId = window.setTimeout(() => {
+			signal?.removeEventListener("abort", onAbort);
+			resolve();
+		}, milliseconds);
+		signal?.addEventListener("abort", onAbort, { once: true });
 	});
 }
 
@@ -30,12 +37,14 @@ export async function fetchCatalog({ signal, onRetry, maxAttempts = 3 } = {}) {
 				throw error;
 			}
 
-			const products = await response.json();
-			if (!Array.isArray(products)) {
-				throw new Error("El catalogo recibido no tiene un formato valido.");
+			let products;
+			try {
+				products = await response.json();
+				return normalizeDemoCatalog(products);
+			} catch (error) {
+				error.retryable = false;
+				throw error;
 			}
-
-			return products;
 		} catch (error) {
 			if (error.name === "AbortError") throw error;
 

@@ -1,32 +1,70 @@
-/** @format */
-
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCart } from "../hooks/useCart";
+import { createDemoReceipt } from "../services/demoCheckout";
 import { formatCLP } from "../utils/currency";
 
-const initialForm = { name: "", email: "", address: "", paymentMethod: "" };
+const OUTCOME_LABELS = {
+	approved: "Aprobado (simulado)",
+	rejected: "Rechazado (simulado)",
+	cancelled: "Cancelado (simulado)",
+	pending: "Pendiente (simulado)",
+};
 
 export function Checkout({ onBack }) {
-	const { items, total, clearCart } = useCart();
-	const [form, setForm] = useState(initialForm);
-	const [submitted, setSubmitted] = useState(false);
+	const { items, total, changeQuantity } = useCart();
+	const [outcome, setOutcome] = useState("approved");
+	const [receipt, setReceipt] = useState(null);
+	const [errorMessage, setErrorMessage] = useState("");
+	const submittedRef = useRef(false);
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		if (items.length === 0) return;
-		setSubmitted(true);
-		clearCart();
+		if (submittedRef.current || receipt || items.length === 0) return;
+		if (!event.currentTarget.reportValidity()) return;
+
+		submittedRef.current = true;
+		const submittedItems = items.map((item) => ({ ...item }));
+		try {
+			const nextReceipt = createDemoReceipt(submittedItems, outcome);
+			if (nextReceipt.status === "approved") {
+				for (const item of submittedItems) {
+					changeQuantity(item.id, -item.quantity);
+				}
+			}
+			setErrorMessage("");
+			setReceipt(nextReceipt);
+		} catch (error) {
+			submittedRef.current = false;
+			setErrorMessage(error.message);
+		}
 	}
 
-	if (submitted) {
+	if (receipt) {
 		return (
-			<section className="confirmation container" role="status">
-				<h1>Pedido confirmado</h1>
-				<p>Gracias por tu compra. Recibiras la confirmacion por correo.</p>
+			<main className="confirmation container" aria-labelledby="checkout-result-title">
+				<p className="demo-notice" role="note">
+					Simulacion educativa: este resultado es ficticio.
+				</p>
+				<h1 id="checkout-result-title">{OUTCOME_LABELS[receipt.status]}</h1>
+				<p>Comprobante ficticio: <strong>{receipt.id}</strong></p>
+				<p>No se realizo ningun pago ni se creo una compra real.</p>
+				<section className="order-summary" aria-labelledby="receipt-summary-title">
+					<h2 id="receipt-summary-title">Resumen de demostracion</h2>
+					{receipt.lines.map((line) => (
+						<p key={line.id}>
+							<span>{line.name} x{line.quantity}</span>
+							<strong>{formatCLP(line.lineTotal)}</strong>
+						</p>
+					))}
+					<p className="order-summary__total">
+						<span>Total CLP</span>
+						<strong>{formatCLP(receipt.total)}</strong>
+					</p>
+				</section>
 				<button type="button" className="button button--primary btn" onClick={onBack}>
 					Volver a la tienda
 				</button>
-			</section>
+			</main>
 		);
 	}
 
@@ -34,7 +72,7 @@ export function Checkout({ onBack }) {
 		return (
 			<section className="confirmation container">
 				<h1>Tu carrito esta vacio</h1>
-				<p>Agrega videojuegos para continuar con tu compra.</p>
+				<p>Agrega videojuegos para continuar con la demostracion.</p>
 				<button type="button" className="button button--primary btn" onClick={onBack}>
 					Ver catalogo
 				</button>
@@ -43,75 +81,49 @@ export function Checkout({ onBack }) {
 	}
 
 	return (
-		<section className="checkout container" aria-labelledby="checkout-title">
+		<main className="checkout container" aria-labelledby="checkout-title">
 			<button type="button" className="text-button" onClick={onBack}>
 				Volver a la tienda
 			</button>
 			<h1 id="checkout-title">Finalizar compra</h1>
+			<p className="demo-notice" role="note">
+				Simulacion educativa: no se solicitan datos personales ni de pago.
+			</p>
 			<div className="checkout__grid row g-4">
 				<section className="order-summary col-12" aria-labelledby="summary-title">
-					<h2 id="summary-title">Resumen del pedido</h2>
+					<h2 id="summary-title">Resumen de demostracion</h2>
 					{items.map((item) => (
 						<p key={item.id}>
-							<span>
-								{item.name} x{item.quantity}
-							</span>
+							<span>{item.name} x{item.quantity}</span>
 							<strong>{formatCLP(item.salePrice * item.quantity)}</strong>
 						</p>
 					))}
 					<p className="order-summary__total">
-						<span>Total</span>
+						<span>Total CLP</span>
 						<strong>{formatCLP(total)}</strong>
 					</p>
 				</section>
 				<form className="checkout-form col-12" onSubmit={handleSubmit}>
 					<label>
-						Nombre completo
-						<input
-							className="form-control"
-							value={form.name}
-							onChange={(event) => setForm({ ...form, name: event.target.value })}
-							required
-						/>
-					</label>
-					<label>
-						Correo electronico
-						<input
-							className="form-control"
-							type="email"
-							value={form.email}
-							onChange={(event) => setForm({ ...form, email: event.target.value })}
-							required
-						/>
-					</label>
-					<label>
-						Direccion de entrega
-						<input
-							className="form-control"
-							value={form.address}
-							onChange={(event) => setForm({ ...form, address: event.target.value })}
-							required
-						/>
-					</label>
-					<label>
-						Metodo de pago
+						Resultado simulado
 						<select
 							className="form-select"
-							value={form.paymentMethod}
-							onChange={(event) =>
-								setForm({ ...form, paymentMethod: event.target.value })
-							}
+							aria-label="Resultado simulado"
+							value={outcome}
+							onChange={(event) => setOutcome(event.target.value)}
 							required>
-							<option value="">Selecciona una opcion</option>
-							<option value="credit">Tarjeta de credito</option>
-							<option value="debit">Tarjeta de debito</option>
+							<option value="approved">Aprobado (simulado)</option>
+							<option value="rejected">Rechazado (simulado)</option>
+							<option value="cancelled">Cancelado (simulado)</option>
+							<option value="pending">Pendiente (simulado)</option>
 						</select>
 					</label>
+					{errorMessage && <p role="alert">{errorMessage}</p>}
 					<button type="submit" className="button button--primary btn">
-						Confirmar pedido
+						Simular compra
 					</button>
 				</form>
 			</div>
-		</section>
+		</main>
 	);
 }

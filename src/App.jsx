@@ -3,15 +3,17 @@
 import { useState } from "react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Checkout } from "./components/Checkout";
+import { DemoAccess } from "./components/DemoAccess";
 import { FeaturedCarousel } from "./components/FeaturedCarousel";
 import { LoadingPage } from "./components/LoadingPage";
+import { ProductDetail } from "./components/ProductDetail";
 import { ProductCatalog } from "./components/ProductCatalog";
 import { useCart } from "./hooks/useCart";
 import { useCatalog } from "./hooks/useCatalog";
 import { useViewportAnimations } from "./hooks/useViewportAnimations";
 import "./App.css";
 
-function CatalogContent({ status, message, products, query, retry, onAdded }) {
+function CatalogContent({ status, message, products, query, retry, onAdded, onOpenProduct }) {
 	if (status === "loading") {
 		return (
 			<div className="loading-state" role="status">
@@ -30,7 +32,14 @@ function CatalogContent({ status, message, products, query, retry, onAdded }) {
 			</div>
 		);
 	}
-	return <ProductCatalog products={products} query={query} onAdded={onAdded} />;
+	return (
+		<ProductCatalog
+			products={products}
+			query={query}
+			onAdded={onAdded}
+			onOpenProduct={onOpenProduct}
+		/>
+	);
 }
 
 function Store() {
@@ -41,6 +50,8 @@ function Store() {
 	const [isCheckout, setIsCheckout] = useState(false);
 	const [announcement, setAnnouncement] = useState("");
 	const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+	const [selectedProduct, setSelectedProduct] = useState(null);
+	const [isDemoProfileActive, setIsDemoProfileActive] = useState(false);
 
 	useViewportAnimations(status);
 
@@ -60,6 +71,15 @@ function Store() {
 	}
 
 	if (isCheckout) return <Checkout onBack={returnToCatalog} />;
+	if (selectedProduct) {
+		return (
+			<ProductDetail
+				product={selectedProduct}
+				onBack={() => setSelectedProduct(null)}
+				onAdded={setAnnouncement}
+			/>
+		);
+	}
 
 	return (
 		<>
@@ -125,9 +145,16 @@ function Store() {
 					<p className="eyebrow">Juega a tu manera</p>
 					<h1 id="page-title">Tu proxima aventura empieza aqui.</h1>
 					<p>
-						Descubre grandes videojuegos, ofertas reales y un carrito que guarda tu
-						seleccion.
+						Descubre videojuegos y conserva tu seleccion en el carrito.
 					</p>
+					<p className="demo-notice" role="note">
+						Simulacion educativa: catalogo y ofertas ficticias, sin compras reales.
+					</p>
+					<DemoAccess
+						isActive={isDemoProfileActive}
+						onActivate={() => setIsDemoProfileActive(true)}
+						onClose={() => setIsDemoProfileActive(false)}
+					/>
 				</section>
 				{status === "success" && (
 					<FeaturedCarousel products={products} onAdded={setAnnouncement} />
@@ -153,6 +180,7 @@ function Store() {
 						query={query}
 						retry={retry}
 						onAdded={setAnnouncement}
+						onOpenProduct={setSelectedProduct}
 					/>
 				</section>
 				<section
@@ -185,6 +213,9 @@ function Store() {
 					<a href="#top">Tienda</a>
 					<a href="#contact">Contacto</a>
 					<a href="mailto:hola@qbrands.cl">Soporte</a>
+					<a href="https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS">
+						Repositorio de GitHub
+					</a>
 				</div>
 				<small>2026 Q Brands. Todos los derechos reservados.</small>
 			</footer>}

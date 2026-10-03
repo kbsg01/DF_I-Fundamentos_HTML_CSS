@@ -1,25 +1,47 @@
-name: Deploy to GitHub Pages
+name: Deploy Q Brands educational demo
 
 on:
   push:
-    branches: [s7]
+    branches: [s8]
+    paths-ignore:
+      - 'dist/**'
+      - 'dist-ssr/**'
+      - 'build/**'
+      - 'coverage/**'
+      - 'node_modules/**'
+      - 'test-results/**'
+      - 'playwright-report/**'
+      - '*.local'
+      - '.env*'
+  pull_request:
+    branches: [s8]
+    paths-ignore:
+      - 'dist/**'
+      - 'dist-ssr/**'
+      - 'build/**'
+      - 'coverage/**'
+      - 'node_modules/**'
+      - 'test-results/**'
+      - 'playwright-report/**'
+      - '*.local'
+      - '.env*'
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: github-pages
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  quality:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    env:
+      VITE_BASE_PATH: /
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,17 +55,42 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Browser tests
+        run: npm run test:e2e
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build static project site
         run: npm run build
+        env:
+          VITE_BASE_PATH: /DF_I-Fundamentos_HTML_CSS/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
-      - name: Deploy
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    needs: quality
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy approved static artifact
         id: deployment
         uses: actions/deploy-pages@v4

@@ -6,16 +6,23 @@
 
 **Status**: Ready for planning
 
-**Input**: User description: "Necesito generar una tienda de juegos tipo G2A o Eneba,
-con login integrado, carrito de pagos e integracion con RAWG. Considerar los documentos
-de S8 y los conocimientos previos reflejados en el historial git del repositorio."
+**Input**: User description: "Necesito generar una tienda educativa de juegos tipo G2A o Eneba,
+con catalogo local, acceso y compra simulados, sin integraciones externas. Considerar los
+documentos de S8 y los conocimientos previos reflejados en el historial git del repositorio."
+
+## Clarifications
+
+### Session 2026-10-03
+
+- Q: ¿Qué recorrido de acceso y compra debe ofrecer la demo sin conectarse a servicios externos? → A: Simular acceso y resultados de compra localmente, con avisos visibles de que son demostraciones; sin integraciones externas, identidades autenticadas, pedidos ni pagos reales. Todo el catalogo y las ofertas seran datos locales de demostracion.
+- Q: ¿La entrega debe seguir publicándose como demo estática pública, aunque no use integraciones externas? → A: Mantener una demo estática pública en GitHub Pages; sin servicios externos durante el uso de la tienda.
 
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Descubrir juegos y comparar ofertas (Priority: P1)
 
-Como visitante quiero explorar juegos, buscar por titulo, filtrar por genero y plataforma,
-y consultar los detalles de una oferta para elegir un producto compatible conmigo.
+Como visitante quiero explorar el catalogo local de demostracion, buscar por titulo,
+filtrar por genero y plataforma, y consultar ofertas ficticias para elegir un producto compatible.
 
 **Why this priority**: El descubrimiento y la informacion comercial fiable son la base de la tienda.
 
@@ -24,14 +31,14 @@ resultados y abrir su ficha; comprobar los datos del juego y la disponibilidad d
 
 **Acceptance Scenarios**:
 
-1. **Given** una fuente de juegos disponible, **When** abro la tienda, **Then** veo juegos
-   con titulo, imagen o alternativa, genero y plataforma, y un enlace de atribucion a RAWG.
+1. **Given** el catalogo local de demostracion, **When** abro la tienda, **Then** veo juegos
+  con titulo, imagen o alternativa, genero y plataforma; no se consulta ninguna API externa.
 2. **Given** juegos de varios generos y plataformas, **When** combino busqueda y filtros,
    **Then** veo solo resultados coincidentes y puedo restablecer los filtros.
 3. **Given** un juego con oferta, **When** abro su ficha, **Then** veo descripcion,
    precio vigente, moneda, plataforma de activacion y region antes de agregarlo al carrito.
-4. **Given** un juego sin oferta de Q Brands, **When** lo consulto, **Then** puedo leer
-   su informacion, pero no comprarlo ni confundir un enlace externo con una oferta propia.
+4. **Given** un juego sin oferta ficticia de Q Brands, **When** lo consulto, **Then** puedo leer
+  su informacion, pero no comprarlo ni confundir contenido informativo con una oferta propia.
 5. **Given** una carga fallida o sin resultados, **When** consulto el catalogo,
    **Then** veo un estado identificable y una accion para reintentar o ajustar la busqueda.
 
@@ -62,57 +69,54 @@ eliminar un producto y recargar; verificar que el contador, las lineas y el tota
 
 ### User Story 3 - Acceder a una cuenta (Priority: P2)
 
-Como comprador quiero iniciar y cerrar sesion, reconocer mi cuenta activa y retomar mi compra.
+Como visitante quiero demostrar el recorrido de acceso con un perfil ficticio, sin crear una cuenta real.
 
-**Why this priority**: El acceso integrado permite asociar el pedido al comprador.
+**Why this priority**: Permite evaluar estados de interfaz sin autenticar personas ni integrar servicios.
 
-**Independent Test**: Con una identidad de prueba, iniciar sesion, recargar, cerrar sesion
-y comprobar que las vistas reflejan cada estado sin mostrar informacion de otra cuenta.
+**Independent Test**: Activar y cerrar el acceso de demostracion y comprobar que la interfaz
+indica que el perfil es ficticio y no expone datos personales.
 
 **Acceptance Scenarios**:
 
-1. **Given** una identidad valida, **When** inicio sesion, **Then** veo mi cuenta activa
-   y regreso al flujo desde el que solicite el acceso conservando el carrito.
-2. **Given** datos invalidos o un servicio no disponible, **When** intento acceder,
-   **Then** veo un error recuperable y no obtengo una sesion autenticada.
-3. **Given** una sesion activa, **When** cierro sesion, **Then** dejo de ver informacion
-   privada y las acciones reservadas a compradores requieren volver a acceder.
-4. **Given** un comprador sin cuenta o sin acceso a ella, **When** solicita registrarse
-  o recuperar el acceso, **Then** puede completar el recorrido de identidad y acceder con
-  una cuenta real; una identidad ficticia no habilita una sesion valida.
+1. **Given** el acceso de demostracion, **When** lo activo, **Then** veo un perfil ficticio
+  claramente identificado y regreso al flujo solicitado conservando el carrito.
+2. **Given** el acceso de demostracion activo, **When** lo cierro, **Then** la interfaz
+  vuelve al estado de visitante y deja de mostrar el perfil ficticio.
+3. **Given** cualquier estado de acceso, **When** uso la demo, **Then** no se solicitan
+  contrasenas, no se registran cuentas y no se afirma que exista autenticacion real.
 
 ---
 
-### User Story 4 - Revisar el pedido y completar el pago (Priority: P2)
+### User Story 4 - Revisar y simular una compra (Priority: P2)
 
-Como comprador identificado quiero revisar mi pedido, conocer el importe final y obtener
-una confirmacion solo cuando el resultado del pago lo permita.
+Como visitante quiero revisar un resumen y simular resultados de compra para entender el flujo,
+sin generar pedidos ni pagos reales.
 
-**Why this priority**: Completa el recorrido comercial sin confundir una solicitud con una compra.
+**Why this priority**: Demuestra validaciones y estados de compra sin transacciones externas.
 
-**Independent Test**: Con una cuenta y carrito preparados, recorrer resultados de pago aprobado,
-rechazado, cancelado y pendiente; comprobar pedido, importe y conservacion del carrito.
+**Independent Test**: Con un carrito preparado, recorrer los resultados ficticios aprobado,
+rechazado, cancelado y pendiente; comprobar los avisos, el importe y el estado del carrito.
 
 **Acceptance Scenarios**:
 
-1. **Given** un carrito valido, **When** avanzo a pagar, **Then** se solicita acceso si
-   falta sesion y se muestran productos, cantidades, moneda y todos los cargos antes de confirmar.
-2. **Given** datos incompletos, una oferta retirada o un precio modificado, **When** confirmo,
-   **Then** se bloquea el pago y se explica la correccion; los cambios de importe requieren aceptacion.
-3. **Given** un pago aprobado, **When** termina el proceso, **Then** veo un identificador
-   de pedido, su estado y el resumen comprado; solo se retiran las lineas incluidas en ese pedido.
-4. **Given** un pago rechazado, cancelado o pendiente, **When** regreso a la tienda,
-   **Then** veo el resultado real, conservo el carrito y no se anuncia una compra aprobada.
-5. **Given** una confirmacion ya enviada, **When** repito la accion o recargo el resultado,
-   **Then** no se crea otro pedido ni se cobra dos veces por la misma confirmacion.
-6. **Given** el entorno de pruebas, **When** inicio el pago, **Then** se informa que
-  no hay cobro real, se usan exclusivamente medios de prueba y no se entrega una clave real.
+1. **Given** un carrito valido, **When** avanzo a revisar la compra, **Then** veo el resumen,
+  cantidades, moneda e importe y un aviso visible de que el flujo es una demostracion.
+2. **Given** una linea invalida o un importe inconsistente, **When** intento continuar,
+  **Then** la demo bloquea la confirmacion y explica como corregir el carrito.
+3. **Given** un resultado simulado aprobado, **When** termina la demostracion, **Then** veo
+  un comprobante ficticio y el resumen; la interfaz aclara que no existe pedido ni pago real.
+4. **Given** un resultado simulado rechazado, cancelado o pendiente, **When** regreso,
+  **Then** veo ese estado como ficticio, conservo el carrito y no se anuncia una compra real.
+5. **Given** una confirmacion simulada, **When** repito la accion o recargo el resultado,
+  **Then** la interfaz evita duplicar el comprobante de demostracion y no crea transacciones.
+6. **Given** el flujo de compra, **When** lo uso, **Then** no se conecta a una pasarela,
+  no solicita datos de pago ni entrega claves reales.
 
 ---
 
 ### User Story 5 - Evaluar la entrega de S8 (Priority: P3)
 
-Como evaluador quiero acceder a la tienda publicada y a evidencias del catalogo dinamico,
+Como evaluador quiero acceder a la demo estatica publicada y a evidencias del catalogo,
 del carrito y de las vistas que cambian con el estado para verificar la entrega.
 
 **Why this priority**: La entrega debe demostrar continuidad y satisfacer la evaluacion academica.
@@ -122,39 +126,41 @@ evidencias y repetir los casos de catalogo, carrito vacio y carrito con producto
 
 **Acceptance Scenarios**:
 
-1. **Given** la entrega publicada, **When** abro sus enlaces, **Then** puedo acceder a la
-   tienda y al repositorio sin permisos privados ni enlaces rotos.
+1. **Given** la entrega publicada en GitHub Pages, **When** abro sus enlaces, **Then** puedo
+  acceder a la demo estatica y al repositorio sin permisos privados ni enlaces rotos, sin que
+  la tienda se conecte a servicios externos durante su uso.
 2. **Given** las evidencias de entrega, **When** las reviso, **Then** encuentro capturas
    de datos cargados dinamicamente, productos agregados/eliminados y estados condicionales.
 
 ### Edge Cases
 
 - Imagen, genero, descripcion o puntuacion ausente: usar alternativa explicita sin inventar datos.
-- Limite de consultas, caida de RAWG o acceso no configurado: mostrar fallo y recuperacion;
-  cualquier catalogo de respaldo debe identificarse y no aparentar datos externos actualizados.
+- Fallo al cargar los datos locales de demostracion: mostrar un error recuperable sin
+  consultar un servicio externo ni presentar datos como si estuvieran actualizados en linea.
 - Busquedas sucesivas: los resultados visibles deben corresponder a la ultima consulta solicitada.
 - Cambio de filtro entre paginas: reiniciar la navegacion y evitar resultados duplicados.
 - Juego homonimo o distintas ediciones: vincular ofertas por identidad estable, no solo por nombre.
 - Cantidad cero, negativa, fraccionaria o superior a disponibilidad: impedir una linea invalida.
 - Carrito antiguo o datos guardados invalidos: conservar lineas validas y explicar las descartadas.
-- Sesion expirada o cuenta distinta durante el pago: volver a validar acceso sin exponer otro pedido.
-- Cierre de sesion: separar los datos privados; no asociar automaticamente pedidos a otra cuenta.
-- Interrupcion o resultado de pago desconocido: mostrar estado pendiente y evitar un nuevo cobro.
-- Acceso desde movil o solo teclado: mantener disponibles busqueda, filtros, acceso, carrito y pago.
+- Cambio entre visitante y perfil ficticio: no mostrar informacion personal ni asociar datos reales.
+- Resultado simulado pendiente o recarga de la confirmacion: identificarlo como ficticio,
+  conservar el carrito y evitar comprobantes duplicados.
+- Acceso desde movil o solo teclado: mantener disponibles busqueda, filtros, acceso de demostracion,
+  carrito y simulacion de compra.
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
-- **FR-001**: La tienda DEBE ofrecer exploracion y fichas de juegos alimentadas por RAWG,
+- **FR-001**: La tienda DEBE ofrecer exploracion y fichas de juegos desde un catalogo local de demostracion,
   con titulo, imagen alternativa, generos, plataformas, descripcion y valoracion cuando existan.
 - **FR-002**: Los visitantes DEBEN buscar por titulo, filtrar por genero y plataforma,
   ordenar por nombre o lanzamiento y recorrer mas resultados sin duplicar juegos.
 - **FR-003**: La tienda DEBE distinguir informacion del juego de ofertas propias: precio,
   moneda, descuento si existe, edicion, plataforma de activacion, region y disponibilidad.
   Solo una oferta con esos datos completos puede agregarse al carrito.
-- **FR-004**: Toda vista con datos o imagenes de RAWG DEBE incluir atribucion y enlace activo
-  a RAWG; la entrega DEBE respetar las condiciones de uso aplicables.
+- **FR-004**: La tienda NO DEBE consultar APIs externas ni requerir claves o cuentas de proveedores.
+  Si los datos locales incluyen contenido de terceros, la entrega DEBE mostrar la atribucion aplicable.
 - **FR-005**: La tienda DEBE mostrar estados de carga, error, sin resultados y recuperacion,
   sin bloquear la consulta del carrito existente por un fallo del catalogo.
 - **FR-006**: El comprador DEBE agregar, incrementar, disminuir, eliminar y vaciar productos;
@@ -163,22 +169,19 @@ evidencias y repetir los casos de catalogo, carrito vacio y carrito con producto
   las selecciones previas validas DEBEN seguir siendo utilizables sin duplicaciones.
 - **FR-008**: Las vistas DEBEN reflejar carrito vacio, producto seleccionado, carga y sesion activa,
   incluyendo un cambio perceptible del control de agregar cuando el producto esta en el carrito.
-- **FR-009**: La tienda DEBE integrar inicio y cierre de sesion, restauracion de sesion valida,
-  errores recuperables y separacion de informacion entre cuentas. La autenticacion DEBE ser
-  real, no una simulacion local; el comprador DEBE poder registrarse y recuperar el acceso
-  mediante el recorrido ofrecido por el servicio de identidad.
-- **FR-010**: Para confirmar un pedido el comprador DEBE identificarse y completar los datos
-  requeridos; el resumen DEBE mostrar el importe final en una moneda antes de autorizar el pago.
-- **FR-011**: La tienda DEBE ofrecer el flujo de pago y distinguir aprobado, rechazado,
-  cancelado y pendiente sin declarar una compra exitosa prematuramente. El pago DEBE integrarse
-  con una pasarela en entorno de pruebas, no ser una simulacion exclusivamente local. DEBE
-  identificarse como prueba, no admitir cobros reales ni entregar claves reales.
-- **FR-012**: Antes de pagar se DEBEN verificar oferta, disponibilidad e importe; cualquier
-  cambio DEBE mostrarse y ser aceptado. Una confirmacion repetida NO DEBE duplicar pedidos ni cobros.
-- **FR-013**: El pedido DEBE conservar identidad del comprador, lineas, cantidades, precios,
-  moneda, total y estado de pago; la confirmacion DEBE incluir un identificador unico y resumen.
-- **FR-014**: La tienda NO DEBE guardar contrasenas en texto legible ni datos completos de tarjetas,
-  ni mostrar informacion privada de una cuenta tras cerrar sesion o cambiar de usuario.
+- **FR-009**: La tienda DEBE ofrecer estados locales de acceso y cierre de una identidad ficticia,
+  claramente rotulada como demostracion. NO DEBE autenticar usuarios ni ofrecer registro o recuperacion reales.
+- **FR-010**: Antes de simular una compra, la tienda DEBE mostrar los productos, cantidades,
+  moneda e importe final; no debe requerir una identidad real.
+- **FR-011**: La tienda DEBE simular resultados aprobado, rechazado, cancelado y pendiente,
+  identificarlos visiblemente como ficticios y aclarar que no existe cobro ni compra real.
+- **FR-012**: Antes de la simulacion se DEBEN validar las lineas y el importe local; cualquier
+  inconsistencia DEBE bloquear la confirmacion y explicarse. Repetir la accion NO DEBE duplicar
+  el comprobante ficticio.
+- **FR-013**: El comprobante de demostracion DEBE mostrar un identificador ficticio, lineas,
+  cantidades, precios, moneda, total y resultado simulado; NO DEBE crear ni persistir un pedido real.
+- **FR-014**: La tienda NO DEBE solicitar ni almacenar contrasenas o datos de tarjetas,
+  ni presentar el perfil ficticio o el comprobante como datos de una cuenta o compra reales.
 - **FR-015**: Los recorridos principales DEBEN funcionar en movil y escritorio, con teclado,
   nombres accesibles, foco visible y respeto a la preferencia de movimiento reducido.
 - **FR-016**: La entrega DEBE conservar la busqueda, categorias, ofertas destacadas, carrito
@@ -188,16 +191,17 @@ evidencias y repetir los casos de catalogo, carrito vacio y carrito con producto
 
 ### Key Entities *(include if feature involves data)*
 
-- **Juego**: Identidad externa estable, titulo, descripcion, imagenes, generos, plataformas,
+- **Juego**: Identidad estable dentro del catalogo local, titulo, descripcion, imagenes, generos, plataformas,
   lanzamiento y valoraciones; su existencia no implica que Q Brands tenga una oferta.
 - **Oferta**: Identidad propia, juego asociado, edicion, plataforma y region de activacion,
   precio normal/vigente, moneda y disponibilidad; Q Brands es el unico vendedor de esta version.
-- **Cuenta y sesion**: Identidad del comprador, nombre visible y estado/vigencia de su acceso.
+- **Perfil ficticio y estado de acceso**: Nombre de demostracion y estado local, sin identidad autenticada.
 - **Carrito y linea**: Seleccion del comprador o visitante, oferta, cantidad y subtotal;
   contador de unidades y total derivan de las lineas.
-- **Pedido**: Identificador, comprador, copia de las ofertas compradas, importes y estado.
-- **Intento de pago**: Pedido relacionado, importe, resultado y referencia que permita
-  reconocer el mismo intento sin duplicar una compra.
+- **Comprobante de demostracion**: Identificador ficticio, copia temporal del resumen, importes
+  y resultado simulado; no representa un pedido persistido.
+- **Resultado simulado**: Estado aprobado, rechazado, cancelado o pendiente seleccionado
+  para demostrar la interfaz; no representa una transaccion de pago.
 
 ## Success Criteria *(mandatory)*
 
@@ -207,14 +211,13 @@ evidencias y repetir los casos de catalogo, carrito vacio y carrito con producto
   un juego conocido y consultar su ficha en menos de 60 segundos.
 - **SC-002**: El 100% de los casos de agregar, cambiar cantidad, eliminar, vaciar y recargar
   conserva un contador y total exactos; ningun juego sin oferta permite comprar.
-- **SC-003**: El 100% de los casos de acceso valido, acceso invalido, expiracion y cierre
-  muestra el estado correcto y no revela informacion de otra cuenta; registro y recuperacion
-  permiten obtener acceso real y las identidades ficticias no autentican.
-- **SC-004**: Un comprador con carrito preparado completa acceso, revision y confirmacion
-  en menos de 3 minutos, excluyendo esperas externas de autorizacion.
+- **SC-003**: El 100% de los casos de acceso y cierre simulados muestra el estado correcto,
+  identifica el perfil como ficticio y no solicita credenciales ni expone datos personales.
+- **SC-004**: Una persona con carrito preparado completa acceso de demostracion, revision
+  y resultado simulado en menos de 3 minutos.
 - **SC-005**: El 100% de los casos aprobado, rechazado, cancelado, pendiente y repetido
-  produce el estado esperado sin pedidos ni cobros duplicados, y el 100% de esos recorridos
-  esta identificado como prueba, sin transacciones monetarias ni entrega de claves reales.
+  muestra un resultado ficticio sin crear pedidos ni pagos reales, solicitar datos de pago
+  ni entregar claves reales.
 - **SC-006**: A 360 y 1280 pixeles de ancho, todos los recorridos principales son utilizables
   sin contenido superpuesto ni desplazamiento horizontal; pueden completarse solo con teclado.
 - **SC-007**: Ante cada fallo de catalogo ensayado se comunica un estado recuperable,
@@ -229,17 +232,14 @@ evidencias y repetir los casos de catalogo, carrito vacio y carrito con producto
 - Q Brands sera el unico vendedor: no incluye alta de vendedores, comisiones ni liquidaciones
   de marketplace. No incluye inventario ni entrega de claves reales en esta primera version.
 - Idioma principal: espanol; moneda inicial: CLP, coherente con el antecedente del proyecto.
-- RAWG aporta metadatos y enlaces a otras tiendas, no precios de Q Brands, inventario,
-  cuentas de clientes, cobros ni claves de activacion. Las ofertas propias permanecen independientes.
-- La fuente local de ofertas se conserva; las nuevas consultas externas enriquecen el catalogo
-  sin convertir todos los juegos del proveedor en productos vendibles.
-- Se asume navegacion publica y carrito de visitante, con acceso requerido antes de confirmar.
-  El usuario confirma autenticacion real; el proveedor y mecanismo se elegiran en el plan.
-- El usuario confirma pagos mediante una pasarela en entorno de pruebas. El proveedor se
-  elegira en el plan segun soporte de CLP y escenarios de prueba. No se habilitara produccion.
-- La entrega depende de acceso autorizado a RAWG y de las condiciones vigentes de su servicio;
-  requiere servicios de identidad real y de pago en pruebas. No se solicitan secretos
-  ni se ejecutan compras, despliegues o cambios de codigo durante esta especificacion.
+- El catalogo y las ofertas usan datos locales de demostracion. No se integra RAWG ni otro
+  servicio externo; la atribucion se conserva cuando corresponda a la procedencia de los datos.
+- El acceso y la compra son simulaciones educativas. No hay autenticacion, pedidos, pagos,
+  inventario ni entrega de claves reales, ni se solicitan secretos o datos de pago.
+- La entrega puede demostrar los recorridos de forma local y no depende de cuentas, credenciales
+  ni disponibilidad de servicios externos.
+- La demo se publica como sitio estatico publico en GitHub Pages para la evaluacion S8; el hosting
+  no implica integrar APIs, identidad, pagos ni otros servicios externos durante el uso.
 - El plan DEBE contrastar la constitucion vigente con las obligaciones academicas y documentar
   cualquier conflicto antes de implementar; esta especificacion no modifica la gobernanza.
 - Los documentos de S8 son lineamientos obligatorios del plan, no requisitos para reconstruir
@@ -255,8 +255,6 @@ evidencias y repetir los casos de catalogo, carrito vacio y carrito con producto
 - [Instrucciones S8](../../docs/s8%20docs/PFY2201_Exp3_S8_Instrucciones_especificas%20%28forma%20A%29.md).
 - [Pauta S8](../../docs/s8%20docs/PFY2201_Exp3_S8_Pauta_de_evaluacion_sumativa.md).
 - [Constitucion](../../.specify/memory/constitution.md).
-- [Documentacion RAWG](https://api.rawg.io/docs/?format=openapi).
-
 La planificacion debe demostrar cobertura de los cinco criterios academicos: gestion del estado
 del catalogo/carrito/interacciones (25 puntos), carga dinamica (20), vistas condicionales (20),
 organizacion y explicacion del codigo (15) y publicacion verificable (20). Las herramientas y

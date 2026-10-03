@@ -7,7 +7,7 @@
 
 ## Content Quality
 
-- [x] CHK001 No contiene decisiones de implementacion, lenguajes, frameworks ni contratos de API.
+- [ ] CHK001 No contiene decisiones de implementacion, lenguajes, frameworks ni contratos de API.
 - [x] CHK002 Se centra en valor de usuario y necesidades de negocio.
 - [x] CHK003 Es comprensible para interesados no tecnicos.
 - [x] CHK004 Todas las secciones obligatorias estan completas.
@@ -28,7 +28,7 @@
 - [x] CHK013 Cada requisito funcional tiene criterio de aceptacion en escenarios o casos limite.
 - [x] CHK014 Las historias cubren los recorridos principales.
 - [x] CHK015 Los resultados esperados son verificables mediante los criterios de exito.
-- [x] CHK016 No se filtran decisiones de implementacion a los requisitos de usuario.
+- [ ] CHK016 No se filtran decisiones de implementacion a los requisitos de usuario.
 
 ## Notes
 
