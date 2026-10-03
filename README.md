@@ -39,11 +39,22 @@ de [validacion](specs/001-game-store/quickstart.md) explica como montar localmen
 
 ## Publicacion
 
-Repositorio: [Q Brands en GitHub](https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS).
+Demo publicada: [Q Brands en GitHub Pages](https://kbsg01.github.io/DF_I-Fundamentos_HTML_CSS/).
 
-Destino previsto: GitHub Pages estatico. La URL publicada queda pendiente de un despacho manual
-autorizado y de la aprobacion del entorno `github-pages`; este repositorio no afirma que ya exista
-un sitio desplegado.
+Repositorio: [Q Brands en GitHub](https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS). El workflow
+de [publicacion](https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS/actions/runs/37161050545)
+paso calidad y despliegue; Pages sirve la rama `gh-pages` desde `/`. El catalogo, acceso y checkout
+siguen siendo demostrativos y locales.
+
+## Evidencia S8
+
+1. **Estados:** catalogo, carrito e interacciones usan estado React; cubiertos por pruebas unitarias y E2E.
+2. **Carga dinamica:** `useEffect` carga el JSON local; la URL publica responde HTTP 200.
+3. **Vistas condicionales:** carga, catalogo, carrito y resultados simulados se muestran en las [capturas](#evidencias) y pruebas E2E.
+4. **Organizacion:** el codigo se separa en componentes, hooks, servicios y contexto; lint y build pasan.
+5. **Publicacion:** la [demo publica](https://kbsg01.github.io/DF_I-Fundamentos_HTML_CSS/) y el [repositorio](https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS) son accesibles.
+
+El detalle de ejecuciones, artefactos y gaps esta en [validacion S8](docs/s8-validation.md).
 
 ## Evidencias
 

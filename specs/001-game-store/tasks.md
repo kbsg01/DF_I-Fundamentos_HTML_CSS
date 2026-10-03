@@ -148,11 +148,11 @@ description: "Tareas de implementacion de la demo educativa estatica de Q Brands
 
 ### Implementation for User Story 5
 
-- [X] T034 [P] [US5] Crear o actualizar `.github/workflows/deploy-pages.yml` para correr `npm ci`, unit/E2E, lint y build; tras despacho manual/entorno aprobado, usar `peaceiris/actions-gh-pages@v4.1.0` con `contents: write`, `publish_branch: gh-pages` y `publish_dir: ./dist`, sin Vercel ni secretos de proveedores. Deps: T001, T002, T033.
+- [X] T034 [P] [US5] Crear o actualizar `.github/workflows/deploy-pages.yml` para correr `npm ci`, unit/E2E, lint y build; tras calidad exitosa en push o `workflow_dispatch`, usar `peaceiris/actions-gh-pages@v4.1.0` con `contents: write`, `publish_branch: gh-pages` y `publish_dir: ./dist`, sin Vercel ni secretos de proveedores. Deps: T001, T002, T033.
 - [X] T035 [P] [US5] Documentar el alcance local, comandos y URL Pages una vez disponible en `README.md`, sin inventar dominios ni anunciar login/pago real. Deps: T013, T021, T026, T032.
 - [X] T036 [US5] Capturar catalogo, carrito y vistas condicionales en `docs/s8/catalog.png`, `docs/s8/cart.png` y `docs/s8/conditional.png`, sin datos personales y con los resultados rotulados como ficticios. Deps: T014, T021, T026, T032.
-- [ ] T037 [US5] Con autorizacion explicita y workflow aprobado, publicar el build estatico de `.github/workflows/deploy-pages.yml`; verificar URL, base path, JSON, assets y acceso publico, y registrar evidencia en `docs/s8-validation.md`. Deps: T034, T035, T036.
-- [ ] T038 [US5] Verificar `FR-017` y `SC-008` revisando enlaces repo/Pages, las tres evidencias y los cinco criterios S8 en `README.md` y `docs/s8-validation.md`; registrar cualquier bloqueo de permisos. Deps: T037.
+- [X] T037 [US5] Con autorizacion explicita y workflow aprobado, publicar el build estatico de `.github/workflows/deploy-pages.yml`; verificar URL, base path, JSON, assets y acceso publico, y registrar evidencia en `docs/s8-validation.md`. Deps: T034, T035, T036.
+- [X] T038 [US5] Verificar `FR-017` y `SC-008` revisando enlaces repo/Pages, las tres evidencias y los cinco criterios S8 en `README.md` y `docs/s8-validation.md`; registrar cualquier bloqueo de permisos. Deps: T037.
 
 **Checkpoint**: No publicar durante desarrollo sin el despacho autorizado; la demo publica no activa integraciones.
 
@@ -165,7 +165,7 @@ description: "Tareas de implementacion de la demo educativa estatica de Q Brands
 - [X] T039 [P] Auditar teclado, nombres, foco, reduced-motion, solapamientos y 360/1280 px en `src/App.css`, `src/index.css` y `tests/e2e/accessibility.spec.js`; corregir solo problemas de los flujos cubiertos. Deps: T014, T021, T026, T032.
 - [X] T040 Retirar la linea residual de checkout sandbox/cuenta real de `specs/001-game-store/quickstart.md` y alinear la guia con JSON local, pruebas locales y Pages estatico. Deps: T001, T032.
 - [X] T041 Ejecutar `npm test`, `npm run test:e2e`, `npm run lint`, `npm run build` y montar `dist` localmente bajo la subruta Pages para smoke, y registrar resultados reales/gaps en `docs/s8-validation.md`; no invocar `test:integration` ni servicios. Deps: T014, T021, T026, T032, T039, T040.
-- [ ] T042 Revisar cobertura `FR-001` a `FR-017`, `SC-001` a `SC-008`, la constitucion y ausencia de imports/solicitudes a proveedores en `package.json`, `src/` y `docs/s8-validation.md`; dejar abierto lo que no tenga evidencia. Deps: T038, T041.
+- [X] T042 Revisar cobertura `FR-001` a `FR-017`, `SC-001` a `SC-008`, la constitucion y ausencia de imports/solicitudes a proveedores en `package.json`, `src/` y `docs/s8-validation.md`; dejar abierto lo que no tenga evidencia. Deps: T038, T041. Gap registrado: SC-004 no tiene medicion de duracion y CHK001/CHK016 permanecen abiertos.
 
 **Checkpoint**: Cerrar solo con las pruebas definidas, lint/build y evidencia de Pages autorizada; ningun estado simulado se reporta como real.
 
