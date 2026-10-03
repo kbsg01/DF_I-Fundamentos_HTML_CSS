@@ -67,9 +67,11 @@ requests when deterministic screenshots are needed.
 
 ## Static publication and S8 evidence
 
-The approved destination is public GitHub Pages. Build `dist` with the project base path and use
-the GitHub Actions Pages artifact workflow. Do not publish during planning or without the required
-repository permission/authorization. Do not configure a second hosted storefront or a backend.
+The approved destination is public GitHub Pages. Build `dist` with the project base path; the
+manual workflow publishes its contents to the `gh-pages` branch using
+`peaceiris/actions-gh-pages`. Configure Pages as **Deploy from a branch**, branch `gh-pages`,
+folder `/`, and allow the workflow to write repository contents. Do not publish without explicit
+authorization. Do not configure a second hosted storefront or a backend.
 
 After an authorized deployment, verify the public URL, repository link, subpath, JSON, assets,
 reload behavior, and the same catalog/cart/access/checkout flows. Evidence must show dynamic local

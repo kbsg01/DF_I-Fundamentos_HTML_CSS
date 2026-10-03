@@ -148,7 +148,7 @@ description: "Tareas de implementacion de la demo educativa estatica de Q Brands
 
 ### Implementation for User Story 5
 
-- [X] T034 [P] [US5] Crear o actualizar `.github/workflows/deploy-pages.yml` para correr `npm ci`, unit/E2E, lint y build, y publicar solo mediante despacho manual/entorno aprobado; usar artefacto estatico `dist`, sin Vercel ni secretos de proveedores. Deps: T001, T002, T033.
+- [X] T034 [P] [US5] Crear o actualizar `.github/workflows/deploy-pages.yml` para correr `npm ci`, unit/E2E, lint y build; tras despacho manual/entorno aprobado, usar `peaceiris/actions-gh-pages@v4.1.0` con `contents: write`, `publish_branch: gh-pages` y `publish_dir: ./dist`, sin Vercel ni secretos de proveedores. Deps: T001, T002, T033.
 - [X] T035 [P] [US5] Documentar el alcance local, comandos y URL Pages una vez disponible en `README.md`, sin inventar dominios ni anunciar login/pago real. Deps: T013, T021, T026, T032.
 - [X] T036 [US5] Capturar catalogo, carrito y vistas condicionales en `docs/s8/catalog.png`, `docs/s8/cart.png` y `docs/s8/conditional.png`, sin datos personales y con los resultados rotulados como ficticios. Deps: T014, T021, T026, T032.
 - [ ] T037 [US5] Con autorizacion explicita y workflow aprobado, publicar el build estatico de `.github/workflows/deploy-pages.yml`; verificar URL, base path, JSON, assets y acceso publico, y registrar evidencia en `docs/s8-validation.md`. Deps: T034, T035, T036.

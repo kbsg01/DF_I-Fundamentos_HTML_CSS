@@ -94,7 +94,7 @@ No se ha publicado el sitio; el gate de Pages permanece pendiente de autorizacio
 ## US5 Preparacion estatica
 
 - T033 pasa en Chromium desktop: catalogo JSON 200, enlace del repositorio correcto y cero requests de negocio externos.
-- Workflow `workflow_dispatch` configurado con quality antes del job de Pages y build bajo `/DF_I-Fundamentos_HTML_CSS/`.
+- Workflow `workflow_dispatch` configurado con quality antes del deploy; `peaceiris/actions-gh-pages` publica `dist` en `gh-pages` bajo `/DF_I-Fundamentos_HTML_CSS/`.
 - Capturas locales listas: `docs/s8/catalog.png`, `docs/s8/cart.png` y `docs/s8/conditional.png`.
 - Repositorio: https://github.com/kbsg01/DF_I-Fundamentos_HTML_CSS.
 - No se despacho el workflow. La URL Pages y smoke publico quedan pendientes de autorizacion/despliegue.
