@@ -1,0 +1,16 @@
+# Dependencias y artefactos de build
+node_modules/
+dist/
+coverage/
+
+# Logs y archivos de entorno (nunca versionar secretos)
+*.log
+.env
+.env.*
+!.env.example
+
+# Editor / sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
