@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Portada de Neón Circuit Racing">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="hsl(314 70% 22%)"/>
+      <stop offset="1" stop-color="hsl(9 75% 45%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g)"/>
+  <circle cx="561" cy="138" r="82" fill="hsl(134 85% 65%)" opacity="0.13"/><rect x="74" y="119" width="37.8" height="27" rx="12" fill="#fff" opacity="0.21" transform="rotate(33 74 119)"/><polygon points="204,141 293,185.5 233.66666666666666,230" fill="hsl(134 85% 65%)" opacity="0.12"/><circle cx="67" cy="166" r="83" fill="hsl(134 85% 65%)" opacity="0.15"/><rect x="373" y="151" width="57.4" height="41" rx="12" fill="#fff" opacity="0.16" transform="rotate(24 373 151)"/><polygon points="598,208 690,254 628.6666666666666,300" fill="hsl(134 85% 65%)" opacity="0.10"/><circle cx="251" cy="376" r="47" fill="hsl(134 85% 65%)" opacity="0.23"/><rect x="255" y="62" width="128.79999999999998" height="92" rx="12" fill="#fff" opacity="0.23" transform="rotate(19 255 62)"/><polygon points="36,317 78,338 50,359" fill="hsl(134 85% 65%)" opacity="0.22"/>
+  <rect x="0" y="280" width="600" height="120" fill="#000" opacity="0.45"/>
+  <text x="32" y="334" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#fff">Neón Circuit Racing</text>
+  <text x="32" y="372" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="hsl(134 85% 65%)">CARRERAS</text>
+</svg>

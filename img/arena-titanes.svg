@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Portada de Arena Titanes">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="hsl(132 70% 22%)"/>
+      <stop offset="1" stop-color="hsl(187 75% 45%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g)"/>
+  <circle cx="99" cy="163" r="30" fill="hsl(312 85% 65%)" opacity="0.15"/><rect x="463" y="319" width="61.599999999999994" height="44" rx="12" fill="#fff" opacity="0.11" transform="rotate(40 463 319)"/><polygon points="302,190 350,214 318,238" fill="hsl(312 85% 65%)" opacity="0.25"/><circle cx="548" cy="85" r="39" fill="hsl(312 85% 65%)" opacity="0.09"/><rect x="60" y="157" width="112" height="80" rx="12" fill="#fff" opacity="0.27" transform="rotate(39 60 157)"/><polygon points="410,67 450,87 423.3333333333333,107" fill="hsl(312 85% 65%)" opacity="0.15"/><circle cx="588" cy="85" r="92" fill="hsl(312 85% 65%)" opacity="0.22"/><rect x="198" y="166" width="53.199999999999996" height="38" rx="12" fill="#fff" opacity="0.18" transform="rotate(27 198 166)"/><polygon points="307,35 401,82 338.3333333333333,129" fill="hsl(312 85% 65%)" opacity="0.15"/>
+  <rect x="0" y="280" width="600" height="120" fill="#000" opacity="0.45"/>
+  <text x="32" y="334" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#fff">Arena Titanes</text>
+  <text x="32" y="372" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="hsl(312 85% 65%)">ACCIÓN</text>
+</svg>

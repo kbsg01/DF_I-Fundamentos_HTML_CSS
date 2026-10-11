@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Portada de Capitán Marea">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="hsl(231 70% 22%)"/>
+      <stop offset="1" stop-color="hsl(286 75% 45%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g)"/>
+  <circle cx="201" cy="349" r="50" fill="hsl(51 85% 65%)" opacity="0.25"/><rect x="94" y="257" width="117.6" height="84" rx="12" fill="#fff" opacity="0.16" transform="rotate(58 94 257)"/><polygon points="157,113 187,128 167,143" fill="hsl(51 85% 65%)" opacity="0.24"/><circle cx="71" cy="190" r="75" fill="hsl(51 85% 65%)" opacity="0.09"/><rect x="562" y="120" width="128.79999999999998" height="92" rx="12" fill="#fff" opacity="0.22" transform="rotate(38 562 120)"/><polygon points="113,344 178,376.5 134.66666666666666,409" fill="hsl(51 85% 65%)" opacity="0.11"/><circle cx="165" cy="341" r="38" fill="hsl(51 85% 65%)" opacity="0.18"/><rect x="489" y="131" width="47.599999999999994" height="34" rx="12" fill="#fff" opacity="0.18" transform="rotate(5 489 131)"/><polygon points="28,372 120,418 58.66666666666667,464" fill="hsl(51 85% 65%)" opacity="0.24"/>
+  <rect x="0" y="280" width="600" height="120" fill="#000" opacity="0.45"/>
+  <text x="32" y="334" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#fff">Capitán Marea</text>
+  <text x="32" y="372" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="hsl(51 85% 65%)">AVENTURA</text>
+</svg>

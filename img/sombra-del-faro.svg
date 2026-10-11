@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Portada de Sombra del Faro">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="hsl(270 70% 22%)"/>
+      <stop offset="1" stop-color="hsl(325 75% 45%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g)"/>
+  <circle cx="534" cy="321" r="34" fill="hsl(90 85% 65%)" opacity="0.27"/><rect x="125" y="375" width="135.79999999999998" height="97" rx="12" fill="#fff" opacity="0.16" transform="rotate(42 125 375)"/><polygon points="305,270 351,293 320.3333333333333,316" fill="hsl(90 85% 65%)" opacity="0.26"/><circle cx="463" cy="218" r="51" fill="hsl(90 85% 65%)" opacity="0.11"/><rect x="524" y="259" width="144.2" height="103" rx="12" fill="#fff" opacity="0.23" transform="rotate(45 524 259)"/><polygon points="263,174 349,217 291.6666666666667,260" fill="hsl(90 85% 65%)" opacity="0.19"/><circle cx="150" cy="300" r="23" fill="hsl(90 85% 65%)" opacity="0.29"/><rect x="318" y="65" width="51.8" height="37" rx="12" fill="#fff" opacity="0.23" transform="rotate(59 318 65)"/><polygon points="183,333 219,351 195,369" fill="hsl(90 85% 65%)" opacity="0.15"/>
+  <rect x="0" y="280" width="600" height="120" fill="#000" opacity="0.45"/>
+  <text x="32" y="334" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#fff">Sombra del Faro</text>
+  <text x="32" y="372" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="hsl(90 85% 65%)">ACCIÓN</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Portada de Granja Zen">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="hsl(306 70% 22%)"/>
+      <stop offset="1" stop-color="hsl(1 75% 45%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g)"/>
+  <circle cx="283" cy="198" r="29" fill="hsl(126 85% 65%)" opacity="0.28"/><rect x="161" y="87" width="95.19999999999999" height="68" rx="12" fill="#fff" opacity="0.14" transform="rotate(18 161 87)"/><polygon points="55,270 141,313 83.66666666666667,356" fill="hsl(126 85% 65%)" opacity="0.15"/><circle cx="378" cy="10" r="31" fill="hsl(126 85% 65%)" opacity="0.27"/><rect x="103" y="141" width="134.39999999999998" height="96" rx="12" fill="#fff" opacity="0.11" transform="rotate(2 103 141)"/><polygon points="472,58 578,111 507.3333333333333,164" fill="hsl(126 85% 65%)" opacity="0.17"/><circle cx="476" cy="196" r="57" fill="hsl(126 85% 65%)" opacity="0.22"/><rect x="525" y="34" width="57.4" height="41" rx="12" fill="#fff" opacity="0.08" transform="rotate(18 525 34)"/><polygon points="189,327 258,361.5 212,396" fill="hsl(126 85% 65%)" opacity="0.22"/>
+  <rect x="0" y="280" width="600" height="120" fill="#000" opacity="0.45"/>
+  <text x="32" y="334" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#fff">Granja Zen</text>
+  <text x="32" y="372" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="hsl(126 85% 65%)">PUZZLE</text>
+</svg>
