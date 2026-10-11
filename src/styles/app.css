@@ -1,0 +1,138 @@
+/*
+ * Estilos personalizados compartidos por la versión React (index.html) y la versión
+ * JavaScript puro (vanilla/index.html). Bootstrap 5 aporta la base; aquí solo se
+ * añade identidad visual, CSS Grid para el catálogo y Flexbox para pequeños bloques.
+ */
+
+:root {
+  --pv-bg: #0e1020;
+  --pv-surface: #181b30;
+  --pv-border: #2b2f4d;
+  --pv-accent: #8b6cff;
+  --pv-accent-hover: #a28bff;
+  --pv-accent-text: #0e1020; /* texto oscuro sobre acento claro: contraste > 7:1 */
+  --pv-price: #3de0b5;
+
+  /* Sobrescribe variables de Bootstrap para mantener coherencia visual */
+  --bs-body-bg: var(--pv-bg);
+  --bs-body-color: #e8e9f5;
+  --bs-border-color: var(--pv-border);
+  --bs-link-color: var(--pv-accent-hover);
+}
+
+body {
+  background: var(--pv-bg);
+}
+
+/* ---------- Navegación ---------- */
+.app-navbar {
+  background: rgb(14 16 32 / 92%);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--pv-border);
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus-visible {
+  color: var(--pv-price);
+}
+
+/* ---------- Enlace de salto (accesibilidad por teclado) ---------- */
+.skip-link:focus {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2000;
+  padding: 0.5rem 1rem;
+  background: var(--pv-accent);
+  color: var(--pv-accent-text);
+  border-radius: 0.375rem;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background:
+    radial-gradient(circle at 20% 0%, rgb(139 108 255 / 35%), transparent 55%),
+    radial-gradient(circle at 85% 100%, rgb(61 224 181 / 22%), transparent 50%),
+    var(--pv-surface);
+  border-bottom: 1px solid var(--pv-border);
+}
+
+.hero-lead {
+  max-width: 42rem;
+}
+
+/* ---------- Botón de acento ---------- */
+.btn-accent {
+  --bs-btn-color: var(--pv-accent-text);
+  --bs-btn-bg: var(--pv-accent);
+  --bs-btn-border-color: var(--pv-accent);
+  --bs-btn-hover-color: var(--pv-accent-text);
+  --bs-btn-hover-bg: var(--pv-accent-hover);
+  --bs-btn-hover-border-color: var(--pv-accent-hover);
+  --bs-btn-active-color: var(--pv-accent-text);
+  --bs-btn-active-bg: var(--pv-accent-hover);
+  --bs-btn-active-border-color: var(--pv-accent-hover);
+  font-weight: 600;
+}
+
+/* ---------- Catálogo: CSS Grid responsivo sin media queries ---------- */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 1.5rem;
+}
+
+.game-card {
+  background: var(--pv-surface);
+  border-color: var(--pv-border);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgb(0 0 0 / 40%);
+}
+
+.game-card .card-img-top {
+  height: auto; /* anula el atributo height del <img> (reserva espacio y evita saltos de layout) */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.game-price {
+  color: var(--pv-price);
+  font-size: 1.15rem;
+}
+
+/* ---------- Formularios ---------- */
+.form-control,
+.form-select {
+  background-color: var(--pv-surface);
+  border-color: var(--pv-border);
+}
+
+/* ---------- Pie de página ---------- */
+.app-footer {
+  background: var(--pv-surface);
+  border-top: 1px solid var(--pv-border);
+  color: #b9bcd6;
+}
+
+/* Foco visible y consistente (WCAG 2.4.7) */
+:focus-visible {
+  outline: 3px solid var(--pv-price);
+  outline-offset: 2px;
+}
+
+/* Respeta la preferencia de usuarios sensibles al movimiento (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  .game-card {
+    transition: none;
+  }
+
+  .game-card:hover {
+    transform: none;
+  }
+}

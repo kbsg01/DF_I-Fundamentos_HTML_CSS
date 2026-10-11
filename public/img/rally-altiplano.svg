@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Portada de Rally Altiplano">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="hsl(177 70% 22%)"/>
+      <stop offset="1" stop-color="hsl(232 75% 45%)"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g)"/>
+  <circle cx="340" cy="242" r="105" fill="hsl(357 85% 65%)" opacity="0.19"/><rect x="59" y="29" width="32.199999999999996" height="23" rx="12" fill="#fff" opacity="0.29" transform="rotate(32 59 29)"/><polygon points="364,328 391,341.5 373,355" fill="hsl(357 85% 65%)" opacity="0.09"/><circle cx="509" cy="281" r="106" fill="hsl(357 85% 65%)" opacity="0.16"/><rect x="99" y="169" width="89.6" height="64" rx="12" fill="#fff" opacity="0.27" transform="rotate(34 99 169)"/><polygon points="288,39 366,78 314,117" fill="hsl(357 85% 65%)" opacity="0.13"/><circle cx="514" cy="242" r="78" fill="hsl(357 85% 65%)" opacity="0.13"/><rect x="591" y="193" width="28" height="20" rx="12" fill="#fff" opacity="0.28" transform="rotate(8 591 193)"/><polygon points="409,22 484,59.5 434,97" fill="hsl(357 85% 65%)" opacity="0.15"/>
+  <rect x="0" y="280" width="600" height="120" fill="#000" opacity="0.45"/>
+  <text x="32" y="334" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#fff">Rally Altiplano</text>
+  <text x="32" y="372" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="hsl(357 85% 65%)">CARRERAS</text>
+</svg>

@@ -1,0 +1,103 @@
+/**
+ * Catálogo de videojuegos como objeto JavaScript (requisito del Paso 2 de la EFT).
+ * La versión React carga el mismo catálogo desde public/data/games.json; una prueba
+ * automatizada (data-sync.test.js) verifica que ambas fuentes no se desalineen.
+ */
+export const GAMES = [
+  {
+    id: 1,
+    name: 'Cumbres de Éter',
+    category: 'Aventura',
+    price: 29990,
+    description: 'Explora islas flotantes, resuelve enigmas ancestrales y descubre el origen del éter en una aventura de mundo abierto.',
+    image: 'img/cumbres-de-eter.svg'
+  },
+  {
+    id: 2,
+    name: 'Neón Circuit Racing',
+    category: 'Carreras',
+    price: 24990,
+    description: 'Carreras arcade a toda velocidad por ciudades futuristas, con garaje de personalización y modo multijugador local.',
+    image: 'img/neon-circuit-racing.svg'
+  },
+  {
+    id: 3,
+    name: 'Fortaleza Cuántica',
+    category: 'Estrategia',
+    price: 34990,
+    description: 'Construye tu base, investiga tecnologías y defiéndela de oleadas enemigas en esta estrategia por turnos.',
+    image: 'img/fortaleza-cuantica.svg'
+  },
+  {
+    id: 4,
+    name: 'Bosque de Runas',
+    category: 'RPG',
+    price: 39990,
+    description: 'RPG de fantasía con combate táctico, árbol de habilidades y decisiones que cambian el final de la historia.',
+    image: 'img/bosque-de-runas.svg'
+  },
+  {
+    id: 5,
+    name: 'Copa Pixel Fútbol',
+    category: 'Deportes',
+    price: 19990,
+    description: 'Fútbol retro en pixel art con equipos ficticios, torneos por temporadas y partidos para dos jugadores.',
+    image: 'img/copa-pixel-futbol.svg'
+  },
+  {
+    id: 6,
+    name: 'Laberinto Lumínico',
+    category: 'Puzzle',
+    price: 9990,
+    description: 'Redirige haces de luz con espejos y prismas para abrir puertas en más de 120 niveles de puzzles.',
+    image: 'img/laberinto-luminico.svg'
+  },
+  {
+    id: 7,
+    name: 'Capitán Marea',
+    category: 'Aventura',
+    price: 27990,
+    description: 'Navega mares inexplorados, recluta tripulación y combate criaturas marinas en una aventura de piratas.',
+    image: 'img/capitan-marea.svg'
+  },
+  {
+    id: 8,
+    name: 'Ciudad Engranaje',
+    category: 'Estrategia',
+    price: 22990,
+    description: 'Gestiona una ciudad steampunk: recursos, transporte y ciudadanos felices en un simulador de construcción.',
+    image: 'img/ciudad-engranaje.svg'
+  },
+  {
+    id: 9,
+    name: 'Sombra del Faro',
+    category: 'Acción',
+    price: 31990,
+    description: 'Acción sigilosa y terror atmosférico en un faro abandonado donde nada es lo que parece.',
+    image: 'img/sombra-del-faro.svg'
+  },
+  {
+    id: 10,
+    name: 'Rally Altiplano',
+    category: 'Carreras',
+    price: 26990,
+    description: 'Rally de montaña con clima dinámico, tramos de tierra y nieve, y copiloto con indicaciones en tiempo real.',
+    image: 'img/rally-altiplano.svg'
+  },
+  {
+    id: 11,
+    name: 'Arena Titanes',
+    category: 'Acción',
+    price: 35990,
+    description: 'Combate cooperativo contra jefes colosales: elige tu clase, coordina a tu equipo y sobrevive a la arena.',
+    image: 'img/arena-titanes.svg'
+  },
+  {
+    id: 12,
+    name: 'Granja Zen',
+    category: 'Puzzle',
+    price: 12990,
+    description: 'Puzzle relajante de cultivo y decoración: combina cosechas, completa pedidos y haz crecer tu huerto.',
+    image: 'img/granja-zen.svg'
+  }
+];
