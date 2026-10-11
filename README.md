@@ -60,7 +60,7 @@ El contenedor compila el sitio y lo sirve con Nginx sin privilegios:
 docker compose up --build
 ```
 
-Abre `http://localhost:8080`. Para detenerlo, ejecuta `docker compose down`.
+Abre `http://localhost:8080`. Para detenerlo, se ejecuta `docker compose down`.
 
 ## Publicación en GitHub Pages
 
@@ -116,18 +116,8 @@ contenedor Docker.
 ## Compatibilidad verificada
 
 Chromium (escritorio) a 375 px, 768 px y 1280 px sin desbordes horizontales ni errores de consola.
-Se recomienda además revisar manualmente Firefox y Safari antes de la entrega.
+Se revisa manualmente Firefox y Safari antes de la entrega.
 Evidencias en `docs/evidencias/` (fuera de este repositorio, en la carpeta de entrega).
-
-## Entrega
-
-1. Repositorio GitHub compartido con el docente (este proyecto).
-2. Video MP4 con el recorrido (guion en `docs/guion_video.md`).
-3. Carpeta comprimida `nombre_Alumno_PFY2201_EFT_FRONT_END_I.zip`:
-
-   ```bash
-   ALUMNO=Nombre_Apellido npm run package
-   ```
 
 ## Control de versiones
 
